@@ -2,6 +2,7 @@
 #
 
 ## Converts all .tiff files in folder to .pdf files. Must have tiff2pdf installed.
+# another permissions test from web interface
 
 FILES=~/Desktop/iperms/*
 for f in $FILES
