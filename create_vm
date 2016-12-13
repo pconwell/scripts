@@ -19,7 +19,7 @@ VBoxManage modifyvm $vm_name --memory $vm_memory --acpi on --pae on --vrdeport $
 VBoxManage createhd --filename $vm_name.vdi --size $vm_hdd_size
 VBoxManage storagectl $vm_name --name "IDE Controller" --add ide
 VBoxManage storageattach $vm_name --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium ~/$vm_name.vdi
-VBoxManage storageattach $vm_name --storagectl "IDE Controller" --port 0 --device 0 --type dvddrive --medium ~/current_ubuntu_server.iso
+VBoxManage storageattach $vm_name --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium ~/current_ubuntu_server.iso
 
 # Start VM
 VBoxHeadless --startvm $vm_name
