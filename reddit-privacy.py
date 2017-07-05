@@ -4,11 +4,12 @@
 # ./reddit-privacy.py -d 30 -p -c
 
 # put your username and password here
-USERNAME = "pconwell"
-PASSWORD = "YhKkUPQL1Q!Hto8lmE@FNnbV"
+USERNAME = ""
+PASSWORD = ""
 
 import urllib, urllib2, cookielib, json, sys, datetime
 from optparse import OptionParser
+
 
 # handle command line arguments
 parser = OptionParser()
@@ -58,27 +59,27 @@ def delete_post(post):
                               'r': post['subreddit'],
                               'uh': modhash })
   opener.open('http://www.reddit.com/api/del', params)
-  print "deleted {0} on {1}".format(post['name'], post['subreddit'])
+  print(f"deleted {post['name']} on {post['subreddit']}")
 
 if options.delete_all:
-  print "Deleting everything."
+  print("Deleting everything.")
 elif options.del_posts or options.del_comments:
   # print what we're deleting
-  print "Deleting",
+  print("Deleting")
   if options.del_posts and options.del_comments:
-    print "posts and comments",
-  elif options.del_posts: print "posts",
-  else: print "comments",
-  
+    print("posts and comments")
+  elif options.del_posts: print("posts")
+  else: print("comments")
+
   # print when we are deleting things
   if options.DAYS is not None:
     if int(options.DAYS) == 1:
-      print "more than {0} day old".format(options.DAYS)
+      print(f"more than {options.DAYS} day old")
     else:
-      print "more than {0} days old".format(options.DAYS)
+      print(f"more than {options.DAYS} days old")
   else: print
 else:
-  print "Deleting nothing, exiting..."
+  print("Deleting nothing, exiting...")
   sys.exit()
 
 # save us some cooookies
@@ -107,14 +108,14 @@ while True:
   for d in todelete:
     delete_post(d)
   todelete = []
-  
+
   # add each post to the list of posts
   for p in posts_json['data']['children']:
     post = p['data']
     if should_delete(post):
       todelete.append(post)
     num += 1
-  
+
   # when we run out of pages, stop
   if posts_json['data']['after'] is None:
     break
