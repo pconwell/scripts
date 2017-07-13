@@ -8,7 +8,7 @@ Once you have a good setup you are happy with using the GUI, load the preset the
 
 ### Copy preset to headless server
 
-$ scp ~/Desktop/preset_name.json pconwell@mediaserver:
+`$ scp ~/Desktop/preset_name.json pconwell@mediaserver:`
 
 ### Rip legally owned copies of DVDs to mediaserver
 
@@ -16,4 +16,10 @@ MakeMKV blah blah... maybe there is a CLI? Either way, using MakeMKV get the .mk
 
 ### HandBrakeCLI
 
-$ HandBrakeCLI --preset-import-file ./preset_name.json -i /temp_storage/temp_videos/filename.mkv -o /videos/Movies/filename.mkv
+The CLI doesn't appear to import preset_name.json correctly. So, for now use
+
+`$ HandBrakeCLI -e x265 -i /temp_storage/temp_videos/Ghost.mkv -o /videos/Movies/Ghost.mkv`
+
+instead of
+
+~~$ HandBrakeCLI --preset-import-file ./preset_name.json -i /temp_storage/temp_videos/filename.mkv -o /videos/Movies/filename.mkv~~
