@@ -23,7 +23,7 @@ for z in $LIST; do
 action=started;
 curl $iftttURL"?value1="$action"&value2="$(basename $z);
 
-HandBrakeCLI --encoder x265 --encoder-preset ultrafast --encoder-profile main --quality 50.0 --comb-detect --decomb --aencoder copy:ac3 -i "$z" -o /videos/Movies/"$(basename $z)";
+HandBrakeCLI --encoder x265 --encoder-preset slower --encoder-profile main --quality 20.0 --comb-detect --decomb --aencoder copy:ac3 -i "$z" -o /videos/Movies/"$(basename $z)";
 
 mv "$z" "$z.bak";
 
