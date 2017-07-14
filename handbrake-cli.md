@@ -65,7 +65,7 @@ instead of
 
 ## Bash script
 
-```
+```bash
 #!/bin/bash
 #
 
