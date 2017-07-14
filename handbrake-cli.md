@@ -69,15 +69,22 @@ instead of
 #!/bin/bash
 #
 
-file=file.mkv
-url=https://maker.ifttt.com/trigger/handbrake/with/key/{{key}}
+iftttURL=https://maker.ifttt.com/trigger/handbrake/with/key/your_ifttt_key_here
 
-action=started
-curl $url'?value1='$action'&value2='$file
+LIST='/temp_storage/temp_videos/*.mkv';
+for z in $LIST; do
 
-HandBrakeCLI --encoder x265 --encoder-preset slower --encoder-profile main --quality 20.0 --comb-detect --decomb --aencoder copy:ac3 -i /temp_storage/temp_videos/file.mkv -o /videos/Movies/file.mkv
+action=started;
+curl $iftttURL"?value1="$action"&value2="$(basename $z);
 
-action=finished
-curl $url'?value1='$action'&value2='$file
+HandBrakeCLI --encoder x265 --encoder-preset ultrafast --encoder-profile main --quality 50.0 --comb-detect --decomb --aencoder copy:ac3 -i "$z" -o /videos/Movies/"$(basename $z)";
+
+mv "$z" "$z.bak";
+
+action=finished;
+curl $iftttURL"?value1="$action"&value2="$(basename $z);
+
+done;
+
 
 ```
