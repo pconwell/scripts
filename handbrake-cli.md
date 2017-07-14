@@ -65,6 +65,19 @@ instead of
 
 ## Bash script
 
+```
+#!/bin/bash
+#
 
+file=file.mkv
+url=https://maker.ifttt.com/trigger/handbrake/with/key/{{key}}
 
-`$ curl https://maker.ifttt.com/trigger/handbrake/with/key/{{key}}?value1=file.mkv`
+action=started
+curl $url'?value1='$action'&value2='$file
+
+HandBrakeCLI --encoder x265 --encoder-preset slower --encoder-profile main --quality 20.0 --comb-detect --decomb --aencoder copy:ac3 -i /temp_storage/temp_videos/file.mkv -o /videos/Movies/file.mkv
+
+action=finished
+curl $url'?value1='$action'&value2='$file
+
+```
