@@ -1,61 +1,21 @@
-#Plex settings and configurations
+# Settings & Configurations for Plex Media Server
 
-## Updated headless plex on ubuntu
-
-### SSH into server
-
-$ ssh mediaserver
-
-### Download updated deb
-
-$ wget https://downloads.plex.tv/plex-media-server/1.7.5.4035-313f93718/plexmediaserver_1.7.5.4035-313f93718_i386.deb
-
-replace `plexmediaserver_1.7.5.4035-313f93718_i386.deb` with the current release
-
-### Install package
-
-$ sudo dpkg -i plexmediaserver_1.7.5.4035-313f93718_i386.deb
-
-### Open web portal in browser
+## Plex Media Server web portal
 
 http://192.168.1.11:32400/web/index.html
 
-# HandBrakeCLI on headless ubuntu server
+## How to update Headless Plex Media Server
 
-## Rip legally owned copies of DVDs to mediaserver
+1. `$ ssh mediaserver`
+2. `$ wget https://downloads.plex.tv/plex-media-server/---/plexmediaserver---.deb`
+3. `$ sudo dpkg -i plexmediaserver_---.deb`
 
-1. Put DVD in computer
-2. Open MakeMKV
-3. ...
-4. Copy to Z:/temp_videos/filename.mkv
+Replace `---` with the current release found at https://www.plex.tv/downloads/
 
-## HandBrakeCLI
+## HandBrakeCLI settings for Plex Media Server
 
-### Bash script
-
-```bash
-#!/bin/bash
-#
-
-iftttURL=https://maker.ifttt.com/trigger/handbrake/with/key/your_ifttt_key_here
-
-LIST='/temp_storage/temp_videos/*.mkv';
-for z in $LIST; do
-
-action=started;
-curl $iftttURL"?value1="$action"&value2="$(basename $z);
-
-HandBrakeCLI --encoder x265 --encoder-preset slower --encoder-profile main --quality 20.0 --comb-detect --decomb --aencoder copy:ac3 -i "$z" -o /videos/Movies/"$(basename $z)";
-
-mv "$z" "$z.bak";
-
-action=finished;
-curl $iftttURL"?value1="$action"&value2="$(basename $z);
-
-done;
-
-
-```
+1. Rip DVD using MakeMKV
+2. `HandBrakeCLI --encoder x265 --encoder-preset slower --encoder-profile main --quality 20.0 --comb-detect --decomb --aencoder copy:ac3 -i ./file.mkv -o ./new_file.mkv`
 
 ### x265 Options
 
