@@ -1,3 +1,5 @@
+# Headless CrashPlan with remote GUI
+
 You guys might already know this, but I wanted to share what I found. I've been trying to back up a headless server on my local network to crashplan central. As I'm sure you are aware, crashplan was not designed to run headless as the app has two parts: a 'gui' front end and the 'service' back end. The 'service' is what does all the actual work, the 'gui' is just how you make changes to settings, check status etc. It should be obvious that a headless server cannot run a gui. So you have to hack the app to run the gui on a local machine and connect to the service on the headless machine.
 
 Getting crashplan up and running on the headless ubuntu server was mostly painless [following these instructions](https://support.code42.com/CrashPlan/4/Configuring/Using_CrashPlan_On_A_Headless_Computer). However, I did not want to have to set up an ssh tunnel every time I wanted to manage the backups. With a lot of help from /u/Atr3id3s, I was able to get the gui to connect to the service without having to use any tunnels, ssh, telnet, etc.
@@ -9,4 +11,3 @@ The problem with the instructions in the link above is that the service is liste
      4243,XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX,192.168.1.11
 
 After that, everything should work perfectly without having to set up an ssh tunnel! Just start the gui on your local machine like normally and it will connect to the service!
-

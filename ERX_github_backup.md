@@ -1,3 +1,5 @@
+# Edgerouter X Backup Config to Github
+
 Had a random thought - Would it be feasible to install a git client and run a crontab script to automatically upload your current config to github? The only issue I would see is /config/config.boot would be uploaded without the password hashed.
 
 I guess you could do something like $ show configuration > /config/user-data/config.boot then $ git add && git commit && git push master origin, or whatever the appropriate commands would be.
@@ -57,5 +59,3 @@ EDIT3: I started thinking about it and it was actually super easy. You just need
       }
 
 You just need to edit yours to add the last line '/config/user-data/github-backup.sh' (assuming you saved your script from above at that location with that name). That's it. Now every time you configure then commit; save;, you will automatically back up your config file to github. I'm really sure how changes are commited and saved in the gui, so this script may or may not work for changes made in the gui.
-
-     

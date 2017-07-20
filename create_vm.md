@@ -1,3 +1,6 @@
+# Create VM Bash Script
+
+```bash
 #!/bin/bash
 #
 
@@ -26,3 +29,4 @@ VBoxHeadless --startvm $vm_name
 
 # Detach dvd drive
 #VBoxManage storageattach $vm_name --storagectl "IDE Controller" --port 1 --device 0 --medium emptydrive
+```
