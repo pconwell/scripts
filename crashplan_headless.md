@@ -1,5 +1,7 @@
 # Headless CrashPlan with remote GUI
 
+Crashplan runs as two different 'services'. A GUI frontend for checking statuses, making changes, etc. The GUI doesn't do any real work backing up files, all the work is done by the backend. The frontend and backend are two separate processes and can be run on two different computers. With a few simple file changes to a couple files, we can run the GUI on one computer and run the backup service on a separate computer.
+
 ## Install Crashplan on remote (headless) server
 
 1. Download [crashplan for linux](https://www.crashplan.com/en-us/thankyou/?os=linux)
