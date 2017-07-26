@@ -34,7 +34,7 @@ force directory mode = 755
 ## Set up Plex (Docker)
 
 1. Install Docker `$ wget -qO- https://get.docker.com/ | sh`
-2. Add user to docker group `$ sudo usermod -aG docker yourusername`
+2. Add user to docker group `$ sudo usermod -aG docker pconwell`
 3. Logout and back in
 4. Test docker instasll `$ docker run hello-world`
 
