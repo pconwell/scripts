@@ -1,4 +1,12 @@
-# Create VM Bash Script
+# Virtual Machines
+
+## Shutdown
+
+VBoxManage controlvm <vmname> pause|resume|reset|poweroff|savestate
+
+```$ VBoxManage controlvm testbox poweroff```
+
+## Create VM Bash Script
 
 ```bash
 #!/bin/bash
