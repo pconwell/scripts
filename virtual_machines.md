@@ -2,7 +2,7 @@
 
 ## Shutdown
 
-VBoxManage controlvm <vmname> pause|resume|reset|poweroff|savestate
+VBoxManage controlvm vmname pause|resume|reset|poweroff|savestate
 
 ```$ VBoxManage controlvm testbox poweroff```
 
