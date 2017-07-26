@@ -1,5 +1,9 @@
 # Settings & Configurations for Plex Media Server
 
+## Install Plex Media Server
+
+1. 
+
 ## Plex Media Server web portal
 
 http://192.168.1.11:32400/web/index.html
