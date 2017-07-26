@@ -70,3 +70,4 @@ There are a few important things to note. First, you will need to change your `P
 
 Also, make sure you are paying attention to `-v /videos/:/data` because this is where the media will be 'mounted' when you look for it in the plex web interface. So, if your media physically resides at `/videos/`, you will find it at `/data/` when you look in the plex web interface.
 
+To restart, stop, start: `$ docker start|stop|restart plex`
