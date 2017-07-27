@@ -1,4 +1,8 @@
-# Setting up a new headless Ubuntu server
+# morty
+
+
+
+# rick
 
 ## Install Ubuntu
 
@@ -95,3 +99,6 @@ Expect the `short` test to be quick (1 - 2 minutes) and the `extended` test to t
 
 1.
 
+## Dropbox Headless
+
+1. 
