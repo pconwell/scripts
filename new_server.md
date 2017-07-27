@@ -1,8 +1,24 @@
 # morty
 
+- [ ] Install RAM
+- [ ] Install HDD
+- [ ] Set up RAID Arrays
+- [ ] Install Ubuntu
+- [ ] Set Up Samba
+- [ ] Set up Plex (Docker)
+- [ ] SMART HDD Monitor
 
 
 # rick
+
+- [x] Install Ubuntu
+- [x] Set Up Samba
+- [ ] ~~Automount external USB drive~~
+- [x] Set up Plex (Docker)
+- [ ] Crashplan (Docker)
+- [ ] Dropbox Headless
+- [x] SMART HDD Monitor
+
 
 ## Install Ubuntu
 
@@ -32,6 +48,8 @@ force directory mode = 755
 4. Restart Samba: `sudo service smbd restart`
 
 ## Automount external USB drive
+
+> Will probably scratch this plan and repurpose external HDD as MD0 (RAID 1)
 
 1. 
 
