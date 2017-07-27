@@ -49,9 +49,12 @@ force directory mode = 755
 
 ## Automount external USB drive
 
-> Will probably scratch this plan and repurpose external HDD as MD0 (RAID 1)
+> Will probably scratch this plan and repurpose external HDD as MD0 (RAID 1). The below steps are to MANUALLY mount usb (`/dev/sdc1`)
 
-1. 
+1. `$ sudo mkdir /media/usbdrive`
+2. `$ sudo mount -t ntfs /dev/sdc1 /media/usbdrive`
+3. Add `/media/usbdrive` to `smb.conf`
+4. `$ sudo service smbd restart`
 
 ## Set up Plex (Docker)
 
@@ -96,7 +99,28 @@ To restart, stop, start: `$ docker start|stop|restart plex`
 
 ## Crashplan (Docker)
 
-1. 
+Crashplan works in two parts: the frontend (GUI) and backend (server). The frontend will be installed on a local machine and the backend will be intsalled on a headless server.
+
+### Backend
+
+1. Install Crashplan Docker:
+
+```
+docker run -d \
+  --name crashplan \
+  -h $HOSTNAME \
+  -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" \
+  --publish 4242:4242 --publish 4243:4243 \
+  --volume /srv/crashplan/data:/var/crashplan \
+  --volume /srv/crashplan/storage:/storage \
+  jrcs/crashplan:latest
+  ```
+
+### Frontend
+
+1. If you have a current install, back up your `.ui_info` file. It can be found at `C:\ProgramData\CrashPlan\.ui_info`
+
+
 
 ## SMART HDD Monitor
 
