@@ -72,7 +72,7 @@ Also, make sure you are paying attention to `-v /videos/:/data` because this is 
 
 To restart, stop, start: `$ docker start|stop|restart plex`
 
-## Crashplan
+## Crashplan (Docker)
 
 1. 
 
@@ -89,10 +89,9 @@ Expect the `short` test to be quick (1 - 2 minutes) and the `extended` test to t
 
 4. For detailed info about drive `$ sudo smartctl -a -d ata /dev/sda`
 5. To conduct test `$ sudo smartctl -t short|long|cnveyance /dev/sda`
-6. To view test results `$ sudo smartctl -l selftest /dev/sda`
+6. To view test progress `$ sudo smartctl -l selftest /dev/sda`
 
+### SMART send email
 
-
-4. 
-
+1.
 
