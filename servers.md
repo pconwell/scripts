@@ -150,7 +150,8 @@ Expect the `short` test to be quick (1 - 2 minutes) and the `extended` test to t
 
 ## Dropbox Headless (Docker)
 
-1. Install Dropbox
+1. `$ sudo mkdir /dropbox && sudo chown -R pconwell:pconwell /dropbox`
+2. Install Dropbox
 ```
 docker run -d --restart=always --name=dropbox \
 -v /dropbox:/dbox/Dropbox \
@@ -158,4 +159,11 @@ docker run -d --restart=always --name=dropbox \
 -e DBOX_GID=1000 \
 janeczku/dropbox
 ```
-2. Check logs to find login URL `$ docker logs dropbox`
+3. Check logs to find login URL `$ docker logs dropbox`. It may take a while for dropbox to start. Eventually you will see something in the logs like
+
+> This computer isn't linked to any Dropbox account...
+> Please visit https://www.dropbox.com/cli_link_nonce?nonce=ffdb0e2dfb2e8838b627b5234b805f5e to link this device.
+
+Follow the provided URL to link your account. Once it is sucessfully linked, you should see `This computer is now linked to Dropbox. Welcome <your name>`.
+
+4. Navigate to your dropbox folder `$ cd /dropbox` and make sure your existing dropbox files are showing up.
