@@ -215,3 +215,21 @@ janeczku/dropbox
 Follow the provided URL to link your account. Once it is sucessfully linked, you should see `This computer is now linked to Dropbox. Welcome <your name>`.
 
 4. Navigate to your dropbox folder `$ cd /dropbox` and make sure your existing dropbox files are showing up.
+
+## Muximux Dashboard (Docker)
+
+This doesn't seem to actually do much. Probably more useful if I used more of the services it attaches to. Might play with it later and see if I can add value.
+
+1. `$ mkdir -p ~/.muximux/config`
+2. Insatll the Muximux container:
+```
+docker run \
+ --name=muximux \
+ --restart=always \
+ -v ~/.muximux/config:/config \
+ -e PGID=1000 -e PUID=1000 \
+ -p 80:80 \
+ -p 443:443 \
+linuxserver/muximux
+```
+3. Open IP of server in browser
