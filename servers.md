@@ -112,11 +112,11 @@ docker run -d \
   -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" \
   --publish 4242:4242 --publish 4243:4243 \
   --volume /srv/crashplan/data:/var/crashplan \
-  --volume /srv/crashplan/backups:/backups \
-  --volume /srv/crashplan/videos:/videos \
-  --volume /srv/crashplan/pictures:/pictures \
-  --volume /srv/crashplan/dropbox:/dropbox \
-  --volume /srv/crashplan/shared:/shared \
+  --volume /srv/crashplan/storage/backups:/backups \
+  --volume /srv/crashplan/storage/videos:/videos \
+  --volume /srv/crashplan/storage/pictures:/pictures \
+  --volume /srv/crashplan/storage/dropbox:/dropbox \
+  --volume /srv/crashplan/storage/shared:/shared \
   jrcs/crashplan:latest
   ```
 
