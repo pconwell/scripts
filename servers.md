@@ -52,9 +52,11 @@ force directory mode = 755
 > Will probably scratch this plan and repurpose external HDD as MD0 (RAID 1). The below steps are to MANUALLY mount usb (`/dev/sdc1`)
 
 1. `$ sudo mkdir /media/usbdrive`
-2. `$ sudo mount -t ntfs /dev/sdc1 /media/usbdrive`
-3. Add `/media/usbdrive` to `smb.conf`
+2. Add `/media/usbdrive` to `smb.conf`
+3. `$ sudo mount -t ntfs /dev/sdc1 /media/usbdrive`
 4. `$ sudo service smbd restart`
+
+Only the last two steps need to be repeated during reboots.
 
 ## Set up Plex (Docker)
 
