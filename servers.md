@@ -162,6 +162,7 @@ janeczku/dropbox
 3. Check logs to find login URL `$ docker logs dropbox`. It may take a while for dropbox to start. Eventually you will see something in the logs like
 
 > This computer isn't linked to any Dropbox account...
+
 > Please visit https://www.dropbox.com/cli_link_nonce?nonce=ffdb0e2dfb2e8838b627b5234b805f5e to link this device.
 
 Follow the provided URL to link your account. Once it is sucessfully linked, you should see `This computer is now linked to Dropbox. Welcome <your name>`.
