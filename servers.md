@@ -69,6 +69,9 @@ Only the last two steps need to be repeated during reboots.
 3. Logout and back in
 4. Test docker instasll `$ docker run hello-world`
 
+To remove a docker container: `docker rm --force [name]`
+To shell into container: `docker exec -it [name] bash`
+
 ### Plex (Docker)
 > Media Server
 
@@ -122,21 +125,54 @@ docker run -d \
   -h $HOSTNAME \
   -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" \
   --publish 4242:4242 --publish 4243:4243 \
-  --volume /srv/crashplan/data:/var/crashplan \
-  --volume /srv/crashplan/storage/backups:/backups \
-  --volume /srv/crashplan/storage/videos:/videos \
-  --volume /srv/crashplan/storage/pictures:/pictures \
-  --volume /srv/crashplan/storage/dropbox:/dropbox \
-  --volume /srv/crashplan/storage/shared:/shared \
+  --volume /backups:/backups \
+  --volume /videos:/videos \
+  --volume /pictures:/pictures \
+  --volume /dropbox:/dropbox \
+  --volume /shared:/shared \
   jrcs/crashplan:latest
   ```
+2. Modify my.services.xml with the CONTAINER'S IP address:
+```
+$ docker exec -it crashplan bash
+# cd /var/crashplan/conf/
+# vi my.services.xml
+
+change <location> to 172.17.0.6:4242
+change <service host> to 172.17.0.6
+
+[esc]:wq
+```
+3. Modify ui.properties with the CONTAINER'S IP address:
+```
+$ docker exec -it crashplan bash
+# cd /var/crashplan/conf/
+# vi ui.properties
+
+change #serviceHost to 172.17.0.6
+
+[esc]:wq
+```  
+4. Restart `docker restart crashplan`. Wait a couple minutes for the container to boot up
+  
+. Check .ui_info
+```
+$ docker exec -it crashplan bash
+# cd /var/crashplan/id/.ui_info
+```
+It should look something like `4243,1234567890abcdef,172.17.0.6`. Note the IP address at the end of the string.
 
 #### Frontend
 
 1. If you have a current install, back up your `.ui_info` file. It can be found at `C:\ProgramData\CrashPlan\.ui_info`
-2. Find the backend's `.ui_info` at `/var/crashplan/data/id/.ui_info`
-3. Copy the backend's `.ui_info` file to `C:\ProgramData\CrashPlan\.ui_info`
-4. The two files should match (the headless server's `.ui_info` and the local machine's `.ui_info` should be exactly the same)
+2. Find the backend's `.ui_info` above.
+3. Copy the backend's `.ui_info` file to `C:\ProgramData\CrashPlan\.ui_info`. If your computer is being difficult, edit the file on your desktop then copy it to `C:\ProgramData\CrashPlan\.ui_info` using admin
+4. Change the IP address to the HOST'S IP address:
+```
+4243,1234567890abcdef,172.17.0.6
+```
+
+The two .ui_info files should be identical EXCEPT the one inside the container has the CONTAINER'S IP address while the one on the remote machine has the HOST'S IP address.
 
 ### Dropbox Headless (Docker)
 > Cloud Storage
