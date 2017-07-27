@@ -93,7 +93,7 @@ plexinc/pms-docker
 
 There are a few important things to note. First, you will need to change your `PLEX_CLAIM` because each token is only good for 5 minutes. Second, make sure the IP is the *host* computers IP address and -h is the hostname.
 
-Also, make sure you are paying attention to `-v /videos/:/data` because this is where the media will be 'mounted' when you look for it in the plex web interface. So, if your media physically resides at `/videos/`, you will find it at `/data/` when you look in the plex web interface.
+Also, make sure you are paying attention to `-v /videos/:/data` because this is where the media will be 'mounted' when you look for it inside the plex container (e.g. when we look at the web interface to add media folders). So, if your media physically resides at `/videos/`, you will find it at `/data/` when you look in the plex web interface.
 
 To restart, stop, start: `$ docker start|stop|restart plex`
 
