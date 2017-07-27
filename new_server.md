@@ -71,3 +71,28 @@ There are a few important things to note. First, you will need to change your `P
 Also, make sure you are paying attention to `-v /videos/:/data` because this is where the media will be 'mounted' when you look for it in the plex web interface. So, if your media physically resides at `/videos/`, you will find it at `/data/` when you look in the plex web interface.
 
 To restart, stop, start: `$ docker start|stop|restart plex`
+
+## Crashplan
+
+1. 
+
+## SMART HDD Monitor
+
+1. `$ sudo apt-get install smartmontools`
+2. Check for SMART capability `$ sudo smartctl -i /dev/sda`
+
+Replace `sda` for each HDD you want to check. Generally, your first HDD will be `sda`, the second will be `sdb` and so on. If the HDD supports SMART you will see `SMART support is: Available - device has SMART capability` and `SMART support is: Enabled`. If SMART is not enabled but is available, you can enable it with `sudo smartctl -s on /dev/sda`.
+
+3. Get a time estimate for the various types of SMART tests `$ sudo smartctl -c /dev/sda`
+
+Expect the `short` test to be quick (1 - 2 minutes) and the `extended` test to take a WHILE (up to 6+ hours depending on disk size). Obviously don't run the extended test if you are expecting to access the disk during the test.
+
+4. For detailed info about drive `$ sudo smartctl -a -d ata /dev/sda`
+5. To conduct test `$ sudo smartctl -t short|long|cnveyance /dev/sda`
+6. To view test results `$ sudo smartctl -l selftest /dev/sda`
+
+
+
+4. 
+
+
