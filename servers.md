@@ -233,3 +233,9 @@ docker run \
 linuxserver/muximux
 ```
 3. Open IP of server in browser
+
+## Glances (Docker)
+
+1. `$ docker pull nicolargo/glances`
+2. Webservices mode: `docker run -d --restart="always" -p 61208-61209:61208-61209 -e GLANCES_OPT="-w" -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host docker.io/nicolargo/glances`
+3. http://192.168.1.11:61208
