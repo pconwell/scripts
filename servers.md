@@ -105,14 +105,17 @@ force directory mode = 755
 
 Only the last two steps need to be repeated during reboots.
 
-## Set up Plex (Docker)
+## Docker
 
 1. Install Docker `$ wget -qO- https://get.docker.com/ | sh`
 2. Add user to docker group `$ sudo usermod -aG docker pconwell`
 3. Logout and back in
 4. Test docker instasll `$ docker run hello-world`
 
-If everything looks good, now we can install the PMS Container. But first, we will need a ['plex claim' token](https://plex.tv/claim). Next: 
+### Plex (Docker)
+
+Before we begin, we will need a ['plex claim' token](https://plex.tv/claim). The token is only good for 5 minutes, so if the install process takes too long, generate a new token.
+
 1. `$ sudo docker pull plexinc/pms-docker`
 2. (Optional) Make a directory for plex config files `$ mkdir ~/.plex`, `$ mkdir ~/.plex/config`, `$ mkdir ~/.plex/transcode`
 3. Run the new container:
@@ -146,11 +149,11 @@ Also, make sure you are paying attention to `-v /videos/:/data` because this is 
 
 To restart, stop, start: `$ docker start|stop|restart plex`
 
-## Crashplan (Docker)
+### Crashplan (Docker)
 
 Crashplan works in two parts: the frontend (GUI) and backend (server). The frontend will be installed on a local machine and the backend will be intsalled on a headless server.
 
-### Backend
+#### Backend
 
 1. Install Crashplan Docker:
 
@@ -169,33 +172,14 @@ docker run -d \
   jrcs/crashplan:latest
   ```
 
-### Frontend
+#### Frontend
 
 1. If you have a current install, back up your `.ui_info` file. It can be found at `C:\ProgramData\CrashPlan\.ui_info`
 2. Find the backend's `.ui_info` at `/var/crashplan/data/id/.ui_info`
 3. Copy the backend's `.ui_info` file to `C:\ProgramData\CrashPlan\.ui_info`
 4. The two files should match (the headless server's `.ui_info` and the local machine's `.ui_info` should be exactly the same)
 
-## SMART HDD Monitor
-
-1. `$ sudo apt-get install smartmontools`
-2. Check for SMART capability `$ sudo smartctl -i /dev/sda`
-
-Replace `sda` for each HDD you want to check. Generally, your first HDD will be `sda`, the second will be `sdb` and so on. If the HDD supports SMART you will see `SMART support is: Available - device has SMART capability` and `SMART support is: Enabled`. If SMART is not enabled but is available, you can enable it with `sudo smartctl -s on /dev/sda`.
-
-3. Get a time estimate for the various types of SMART tests `$ sudo smartctl -c /dev/sda`
-
-Expect the `short` test to be quick (1 - 2 minutes) and the `extended` test to take a WHILE (up to 6+ hours depending on disk size). Obviously don't run the extended test if you are expecting to access the disk during the test.
-
-4. For detailed info about drive `$ sudo smartctl -a -d ata /dev/sda`
-5. To conduct test `$ sudo smartctl -t short|long|cnveyance /dev/sda`
-6. To view test progress `$ sudo smartctl -l selftest /dev/sda`
-
-### SMART send email
-
-1.
-
-## Dropbox Headless (Docker)
+### Dropbox Headless (Docker)
 
 1. `$ sudo mkdir /dropbox && sudo chown -R pconwell:pconwell /dropbox`
 2. Install Dropbox
@@ -216,7 +200,7 @@ Follow the provided URL to link your account. Once it is sucessfully linked, you
 
 4. Navigate to your dropbox folder `$ cd /dropbox` and make sure your existing dropbox files are showing up.
 
-## Muximux Dashboard (Docker)
+### Muximux Dashboard (Docker)
 
 This doesn't seem to actually do much. Probably more useful if I used more of the services it attaches to. Might play with it later and see if I can add value.
 
@@ -234,8 +218,27 @@ linuxserver/muximux
 ```
 3. Open IP of server in browser
 
-## Glances (Docker)
+### Glances (Docker)
 
 1. `$ docker pull nicolargo/glances`
 2. Webservices mode: `docker run -d --restart="always" -p 61208-61209:61208-61209 -e GLANCES_OPT="-w" -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host docker.io/nicolargo/glances`
 3. http://192.168.1.11:61208
+
+## SMART HDD Monitor
+
+1. `$ sudo apt-get install smartmontools`
+2. Check for SMART capability `$ sudo smartctl -i /dev/sda`
+
+Replace `sda` for each HDD you want to check. Generally, your first HDD will be `sda`, the second will be `sdb` and so on. If the HDD supports SMART you will see `SMART support is: Available - device has SMART capability` and `SMART support is: Enabled`. If SMART is not enabled but is available, you can enable it with `sudo smartctl -s on /dev/sda`.
+
+3. Get a time estimate for the various types of SMART tests `$ sudo smartctl -c /dev/sda`
+
+Expect the `short` test to be quick (1 - 2 minutes) and the `extended` test to take a WHILE (up to 6+ hours depending on disk size). Obviously don't run the extended test if you are expecting to access the disk during the test.
+
+4. For detailed info about drive `$ sudo smartctl -a -d ata /dev/sda`
+5. To conduct test `$ sudo smartctl -t short|long|cnveyance /dev/sda`
+6. To view test progress `$ sudo smartctl -l selftest /dev/sda`
+
+### SMART send email
+
+1.
