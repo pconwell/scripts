@@ -31,11 +31,58 @@
 1. Make sure samba is installed if you did not install it during [[Install Ubuntu]]
 2. Identify directories that you want to share
 3. Assuming samba is sharing with trusted users, add the following to the bottom of `/etc/samba/smb.conf`:
-
 ```
 [plex]
 browseable = yes
 path = /videos/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[USB]
+browseable = yes
+path = /media/usbdrive
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[backups]
+browseable = yes
+path = /backups/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[shared]
+browseable = yes
+path = /shared/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[dropbox]
+browseable = yes
+path = /dropbox/
 guest ok = yes
 force user = pconwell
 force group = pconwell
