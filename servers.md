@@ -148,6 +148,14 @@ Expect the `short` test to be quick (1 - 2 minutes) and the `extended` test to t
 
 1.
 
-## Dropbox Headless
+## Dropbox Headless (Docker)
 
-1. 
+1. Install Dropbox
+```
+docker run -d --restart=always --name=dropbox \
+-v /dropbox:/dbox/Dropbox \
+-e DBOX_UID=1000 \
+-e DBOX_GID=1000 \
+janeczku/dropbox
+```
+2. Check logs to find login URL `$ docker logs dropbox`
