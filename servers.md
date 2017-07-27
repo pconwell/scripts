@@ -16,17 +16,19 @@
 - [ ] ~~Automount external USB drive~~
 - [x] Set up Plex (Docker)
 - [ ] Crashplan (Docker)
-- [ ] Dropbox Headless
+- [x] Dropbox Headless
 - [x] SMART HDD Monitor
 
 
-## Install Ubuntu
+## Ubuntu
+> Base Operating System
 
 1. Download Ubuntu server
 2. Burn iso to disk
 3. Install distro
 
-## Set up Samba
+## Samba
+> Shared drives
 
 1. Make sure samba is installed if you did not install it during [[Install Ubuntu]]
 2. Identify directories that you want to share
@@ -106,6 +108,7 @@ force directory mode = 755
 Only the last two steps need to be repeated during reboots.
 
 ## Docker
+> Container Manager
 
 1. Install Docker `$ wget -qO- https://get.docker.com/ | sh`
 2. Add user to docker group `$ sudo usermod -aG docker pconwell`
@@ -113,6 +116,7 @@ Only the last two steps need to be repeated during reboots.
 4. Test docker instasll `$ docker run hello-world`
 
 ### Plex (Docker)
+> Media Server
 
 Before we begin, we will need a ['plex claim' token](https://plex.tv/claim). The token is only good for 5 minutes, so if the install process takes too long, generate a new token.
 
@@ -150,6 +154,7 @@ Also, make sure you are paying attention to `-v /videos/:/data` because this is 
 To restart, stop, start: `$ docker start|stop|restart plex`
 
 ### Crashplan (Docker)
+> Remote Backups
 
 Crashplan works in two parts: the frontend (GUI) and backend (server). The frontend will be installed on a local machine and the backend will be intsalled on a headless server.
 
@@ -180,6 +185,7 @@ docker run -d \
 4. The two files should match (the headless server's `.ui_info` and the local machine's `.ui_info` should be exactly the same)
 
 ### Dropbox Headless (Docker)
+> Cloud Storage
 
 1. `$ sudo mkdir /dropbox && sudo chown -R pconwell:pconwell /dropbox`
 2. Install Dropbox
@@ -201,6 +207,7 @@ Follow the provided URL to link your account. Once it is sucessfully linked, you
 4. Navigate to your dropbox folder `$ cd /dropbox` and make sure your existing dropbox files are showing up.
 
 ### Muximux Dashboard (Docker)
+> Server Dashboard
 
 This doesn't seem to actually do much. Probably more useful if I used more of the services it attaches to. Might play with it later and see if I can add value.
 
@@ -219,12 +226,14 @@ linuxserver/muximux
 3. Open IP of server in browser
 
 ### Glances (Docker)
+> Server Monitor
 
 1. `$ docker pull nicolargo/glances`
 2. Webservices mode: `docker run -d --restart="always" -p 61208-61209:61208-61209 -e GLANCES_OPT="-w" -v /var/run/docker.sock:/var/run/docker.sock:ro --pid host docker.io/nicolargo/glances`
 3. http://192.168.1.11:61208
 
 ## SMART HDD Monitor
+> HDD Monitor
 
 1. `$ sudo apt-get install smartmontools`
 2. Check for SMART capability `$ sudo smartctl -i /dev/sda`
