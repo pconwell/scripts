@@ -123,8 +123,9 @@ docker run -d \
 ### Frontend
 
 1. If you have a current install, back up your `.ui_info` file. It can be found at `C:\ProgramData\CrashPlan\.ui_info`
-
-
+2. Find the backend's `.ui_info` at `/var/crashplan/data/id/.ui_info`
+3. Copy the backend's `.ui_info` file to `C:\ProgramData\CrashPlan\.ui_info`
+4. The two files should match (the headless server's `.ui_info` and the local machine's `.ui_info` should be exactly the same)
 
 ## SMART HDD Monitor
 
