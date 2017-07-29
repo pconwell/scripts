@@ -1,7 +1,9 @@
 # morty
 
-- [ ] Install RAM
+- [x] Install RAM
 - [ ] Install HDD
+- [ ] Update BIOS
+- [ ] Update PERC 6/i
 - [ ] Set up RAID Arrays
 - [ ] Install Ubuntu
 - [ ] Set Up Samba
