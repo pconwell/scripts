@@ -1,17 +1,35 @@
-# morty
+# morty (poweredge r710)
 
 - [x] Install RAM
 - [ ] Install HDD
-- [ ] Update BIOS
-- [ ] Update PERC 6/i
+- [ ] Update Firmware(s)
 - [ ] Set up RAID Arrays
 - [ ] Install Ubuntu
 - [ ] Set Up Samba
 - [ ] Set up Plex (Docker)
 - [ ] SMART HDD Monitor
 
+## Update firmware
+> I can't get the firmware to update. The bootable USB wouldn't work at all (it would boot but then 'couldn't find the .bin files). Burnt a disk and it *acted* like it would work but then kept saying there wasn't enough memory. The firmware is all mostly up-to-date as is, and the changelogs don't show anything that should hender my needs. So, I'll just skip this for now.
 
-# rick
+~~~1. Download [R710 firmware ISO](https://dell.app.box.com/v/BootableR710)
+2. Make bootable USB with [Rufus](https://rufus.akeo.ie/)
+3. Boot to USB (F11 to get to the boot selection screen)~~~
+
+
+## Set up RAID Arrays
+> This will take a WHILE. Initiating a large RAID can take 24+ hours.
+
+1. Boot into RAID Controller (ctrl + R during boot)
+2. Set up RAID as desired
+3. Wait
+
+
+
+##
+
+
+# rick (poweredge 850)
 
 - [x] Install Ubuntu
 - [x] Set Up Samba
