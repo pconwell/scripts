@@ -35,12 +35,12 @@
 2. Burn iso to disk
 3. Install distro
 
-* VD0 == sda
-  - sda1 == /boot
-  - sda2 == /
-  - sda3 == swap
-* VD1 == sdb
-  - sdb1 == /videos
+* VD0 --> sda
+  - sda1 --> /boot
+  - sda2 --> /
+  - sda3 --> swap
+* VD1 --> sdb
+  - sdb1 --> /videos
   
 ## Samba
 > Shared drives
@@ -64,6 +64,10 @@
 
 4. Restart Samba: `sudo service smbd restart`
 5. `$ sudo chown pconwell:pconwell /videos`
+
+6. `$ scp pconwell@rick:/videos/.../files.mkv /videos/.../
+
+> `$ scp remote_username@remote_host:file /local/directory/`
 
 
 
