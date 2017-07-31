@@ -40,7 +40,7 @@
   - sda2 --> /
   - sda3 --> swap
 * VD1 --> sdb
-  - sdb1 --> /videos
+  - sdb1 --> /plex
   
 `sudo apt-get update && sudo apt-get upgrade -y`
   
@@ -64,8 +64,8 @@
 | directory mask = 755
 | force directory mode = 755
 
-4. Restart Samba: `sudo service smbd restart`
 5. `$ sudo chown pconwell:pconwell /videos`
+4. Restart Samba: `sudo service smbd restart`
 
 6. `$ scp pconwell@rick:/videos/.../files.mkv /videos/.../`
 
