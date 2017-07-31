@@ -54,7 +54,7 @@
 | [plex]           |
 | ---------------- |
 | browseable = yes 
-| path = /videos/  
+| path = /plex/  
 | guest ok = yes
 | force user = pconwell
 | force group = pconwell
