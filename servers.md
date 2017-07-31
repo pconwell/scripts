@@ -1,13 +1,14 @@
 # morty (poweredge r710)
 
 - [x] Install RAM
-- [ ] Install HDD
+- [x] Install HDD
 - [ ] ~~~Update Firmware(s)~~~
-- [ ] Set up RAID Arrays
+- [x] Set up RAID Arrays
 - [ ] Install Ubuntu
+- [ ] Dell OpenManage
 - [ ] Set Up Samba
-- [ ] Set up Plex (Docker)
-- [ ] SMART HDD Monitor
+- [ ] Set up Plex Repo
+- [ ] SMART HDD Monitor (?)
 
 ## Update firmware
 > I can't get the firmware to update. The bootable USB wouldn't work at all (it would boot but then 'couldn't find the .bin files). Burnt a disk and it *acted* like it would work but then kept saying there wasn't enough memory. The firmware is all mostly up-to-date as is, and the changelogs don't show anything that should hender my needs. So, I'll just skip this for now.
@@ -18,15 +19,15 @@
 
 
 ## Set up RAID Arrays
-> This will take a WHILE. Initiating a large RAID can take 24+ hours.
+> This can take a while.
 
 1. Boot into RAID Controller (ctrl + R during boot)
-2. Set up RAID as desired
-3. Wait
+2. Set up RAID as desired. Make sure RAID is set to force write back (not write through). Write through is 'safer', but much slower.
+  - VD0 --> RAID 1 136.125 GB
+  - VD1 --> RAID 6 3.636 TB
+3. Initalize both RAIDs and wait for background initialization to complete. This will take about 3 hours.
 
-> Make sure RAID is set to write back (not write through). Write through is 'safer', but much slower.
-
-
+> You can probably start using the array before the background init is complete, but it doesn't take too long and there is some information that suggets that trying to use more space on the array that the percentage of background init completed will cause issues. Better safe than sorry.
 
 ## Ubuntu
 > Base Operating System
@@ -43,6 +44,10 @@
   - sdb1 --> /plex
   
 `sudo apt-get update && sudo apt-get upgrade -y`
+
+## Dell OpenManage
+> http://linux.dell.com/repo/community/ubuntu/
+
   
 ## Samba
 > Shared drives
@@ -71,6 +76,8 @@
 
 > `$ scp remote_username@remote_host:file /local/directory/`
 
+## Plex Repo
+> https://support.plex.tv/hc/en-us/articles/235974187-Enable-repository-updating-for-supported-Linux-server-distributions
 
 
 
@@ -78,7 +85,6 @@
 
 - [x] Install Ubuntu
 - [x] Set Up Samba
-- [ ] ~~Automount external USB drive~~
 - [x] Set up Plex (Docker)
 - [ ] Crashplan (Docker)
 - [x] Dropbox Headless
@@ -91,6 +97,11 @@
 1. Download Ubuntu server
 2. Burn iso to disk
 3. Install distro
+  - Software RAID 1 (1.5 TB)
+    - `/backups`
+    - `/shared`
+    - `/dropbox`
+    - `/pictures`
 
 
 ## Samba
@@ -100,10 +111,10 @@
 2. Identify directories that you want to share
 3. Assuming samba is sharing with trusted users, add the following to the bottom of `/etc/samba/smb.conf`:
 
-| [plex]           | [backups]        | [shared]         | [dropbox]         | [pictures]       |
-| ---------------- |------------------| ---------------- | ----------------- | -----------------|
-| browseable = yes | browseable = yes | browseable = yes | browseable = yes  | browseable = yes |
-| path = /videos/  | path = /backups/ | path = /shared/  | path = /dropbox/  | path = /pictures |
+| [backups]        | [shared]         | [dropbox]         | [pictures]       |
+|------------------| ---------------- | ----------------- | -----------------|
+| browseable = yes | browseable = yes | browseable = yes  | browseable = yes |
+| path = /backups/ | path = /shared/  | path = /dropbox/  | path = /pictures |
 | guest ok = yes
 | force user = pconwell
 | force group = pconwell
@@ -113,7 +124,10 @@
 | directory mask = 755
 | force directory mode = 755
 
-4. Restart Samba: `sudo service smbd restart`
+4. `$ sudo chown pconwell:pconwell /backups`
+  - Repeat for `shared`, `dropbox`, and `pictures`
+
+5. Restart Samba: `sudo service smbd restart`
 
 ## Automount external USB drive
 
