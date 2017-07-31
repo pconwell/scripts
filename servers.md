@@ -1,5 +1,11 @@
 # morty (poweredge r710)
 
+## Quick Stats
+
+* Processor: Dual Xeon ...
+* RAM: 32 GB (8 x 4 GB)
+* HDD: 136 GB & 3636 GB
+
 - [x] Install RAM
 - [x] Install HDD
 - [ ] ~~~Update Firmware(s)~~~
@@ -10,13 +16,29 @@
 - [ ] Set up Plex Repo
 - [ ] SMART HDD Monitor (?)
 
+## Install RAM
+> 32 GB (8 x 4 GB). 16 GB for each processor.
+
+## Install HDD
+> Two RAID arrays. One for the OS and one for /plex videos
+
+* SAS
+  - PD 00: HP EH0146FBQDC (146 GB)
+  - PD 04: HP EH0146FBQDC (146 GB)
+* SATA
+  - PD 01: HGST HTS721010A9 (1 TB)
+  - PD 02: HGST HTS721010A9 (1 TB)
+  - PD 03: HGST HTS721010A9 (1 TB)
+  - PD 05: HGST HTS721010A9 (1 TB)
+  - PD 06: HGST HTS721010A9 (1 TB)
+  - PD 07: HGST HTS721010A9 (1 TB)
+    
 ## Update firmware
-> I can't get the firmware to update. The bootable USB wouldn't work at all (it would boot but then 'couldn't find the .bin files). Burnt a disk and it *acted* like it would work but then kept saying there wasn't enough memory. The firmware is all mostly up-to-date as is, and the changelogs don't show anything that should hender my needs. So, I'll just skip this for now.
+> I can't get the firmware to update. The bootable USB wouldn't work at all (it would boot but then "couldn't find the .bin files"). Burnt a disk and it *acted* like it would work but then kept saying there wasn't enough memory. The firmware is all mostly up-to-date as is, and the changelogs don't show anything that should hender my needs. So, I'll just skip this for now.
 
 1. ~~~Download [R710 firmware ISO](https://dell.app.box.com/v/BootableR710)~~~
 2. ~~~Make bootable USB with [Rufus](https://rufus.akeo.ie/)~~~
 3. ~~~Boot to USB (F11 to get to the boot selection screen)~~~
-
 
 ## Set up RAID Arrays
 > This can take a while.
