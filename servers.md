@@ -42,6 +42,8 @@
 * VD1 --> sdb
   - sdb1 --> /videos
   
+`sudo apt-get update && sudo apt-get upgrade -y`
+  
 ## Samba
 > Shared drives
 
