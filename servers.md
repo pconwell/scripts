@@ -24,9 +24,48 @@
 2. Set up RAID as desired
 3. Wait
 
+> Make sure RAID is set to write back (not write through). Write through is 'safer', but much slower.
 
 
-##
+
+## Ubuntu
+> Base Operating System
+
+1. Download Ubuntu server
+2. Burn iso to disk
+3. Install distro
+
+* VD0 == sda
+  - sda1 == /boot
+  - sda2 == /
+  - sda3 == swap
+* VD1 == sdb
+  - sdb1 == /videos
+  
+## Samba
+> Shared drives
+
+1. Make sure samba is installed if you did not install it during [[Install Ubuntu]]
+2. Identify directories that you want to share
+3. Assuming samba is sharing with trusted users, add the following to the bottom of `/etc/samba/smb.conf`:
+
+| [plex]           |
+| ---------------- |
+| browseable = yes 
+| path = /videos/  
+| guest ok = yes
+| force user = pconwell
+| force group = pconwell
+| read only = no
+| create mask = 664
+| force create mode = 644
+| directory mask = 755
+| force directory mode = 755
+
+4. Restart Samba: `sudo service smbd restart`
+5. `$ sudo chown pconwell:pconwell /videos`
+
+
 
 
 # rick (poweredge 850)
