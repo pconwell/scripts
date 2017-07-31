@@ -65,7 +65,7 @@
 4. Restart Samba: `sudo service smbd restart`
 5. `$ sudo chown pconwell:pconwell /videos`
 
-6. `$ scp pconwell@rick:/videos/.../files.mkv /videos/.../
+6. `$ scp pconwell@rick:/videos/.../files.mkv /videos/.../`
 
 > `$ scp remote_username@remote_host:file /local/directory/`
 
