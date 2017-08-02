@@ -70,6 +70,16 @@
 ## Dell OpenManage
 > http://linux.dell.com/repo/community/ubuntu/
 
+1. `$ sudo echo 'deb http://linux.dell.com/repo/community/ubuntu xenial openmanage' | sudo tee -a /etc/apt/sources.list.d/linux.dell.com.sources.list`
+2. `$ sudo gpg --keyserver pool.sks-keyservers.net --recv-key 1285491434D8786F`
+3. `$ sudo gpg -a --export 1285491434D8786F | sudo apt-key add -`
+4. `$ sudo apt-get update`
+
+5. `$ $ sudo apt-get install srvadmin-storageservices srvadmin-webserver`
+6. `$ sudo update-rc.d dsm_om_connsvc defaults`
+
+7. https://192.168.1.12:1311
+
   
 ## Samba
 > Shared drives
