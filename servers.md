@@ -216,6 +216,21 @@ To restart, stop, start: `$ docker start|stop|restart plex`
 
 Crashplan works in two parts: the frontend (GUI) and backend (server). The frontend will be installed on a local machine and the backend will be intsalled on a headless server.
 
+Before setting up crashplan, make sure to mount the network drive for plex (plex share on morty)
+
+1. `$ sudo nano /etc/samba/user`
+2. add the following to lines to the above file
+```
+username=samba_user
+password=samba_user_password
+```
+3. `$ sudo mkdir /plex_mount`
+4. `$ sudo chown pconwell:pconwell /plex_mount`
+4. `$ sudo nano /etc/fstab`
+5. add `//192.168.1.12/plex /plex_mount cifs credentials=/etc/samba/user,noexec 0 0`
+> `192.168.1.12` is the IP address to morty
+6. `$  sudo mount /plex_mount/`
+
 #### Backend
 
 1. Install Crashplan Docker:
