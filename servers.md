@@ -241,42 +241,20 @@ docker run -d \
   -h $HOSTNAME \
   -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" \
   --publish 4242:4242 --publish 4243:4243 \
-  --volume /backups:/backups \
-  --volume /videos:/videos \
-  --volume /pictures:/pictures \
+  --volume /backup:/backups \
+  --volume /plex_mount:/videos \
+  --volume /picture:/pictures \
   --volume /dropbox:/dropbox \
-  --volume /shared:/shared \
+  --volume /share:/shared \
   jrcs/crashplan:latest
   ```
-2. Modify my.services.xml with the CONTAINER'S IP address:
+2. Copy .ui_info from the crashplan container:
 ```
 $ docker exec -it crashplan bash
-# cd /var/crashplan/conf/
-# vi my.services.xml
-
-change <location> to 172.17.0.6:4242
-change <service host> to 172.17.0.6
-
-[esc]:wq
+# cat /var/crashplan/id/.ui_info
+4243,5f2abe42-313c-48ff-8e58-80bd2073484e,0.0.0.0
 ```
-3. Modify ui.properties with the CONTAINER'S IP address:
-```
-$ docker exec -it crashplan bash
-# cd /var/crashplan/conf/
-# vi ui.properties
-
-change #serviceHost to 172.17.0.6
-
-[esc]:wq
-```  
-4. Restart `docker restart crashplan`. Wait a couple minutes for the container to boot up
-  
-. Check .ui_info
-```
-$ docker exec -it crashplan bash
-# cd /var/crashplan/id/.ui_info
-```
-It should look something like `4243,1234567890abcdef,172.17.0.6`. Note the IP address at the end of the string.
+Make a note of the `.ui_info` file.
 
 #### Frontend
 
@@ -285,10 +263,10 @@ It should look something like `4243,1234567890abcdef,172.17.0.6`. Note the IP ad
 3. Copy the backend's `.ui_info` file to `C:\ProgramData\CrashPlan\.ui_info`. If your computer is being difficult, edit the file on your desktop then copy it to `C:\ProgramData\CrashPlan\.ui_info` using admin
 4. Change the IP address to the HOST'S IP address:
 ```
-4243,1234567890abcdef,172.17.0.6
+4243,5f2abe42-313c-48ff-8e58-80bd2073484e,192.168.1.11
 ```
 
-The two .ui_info files should be identical EXCEPT the one inside the container has the CONTAINER'S IP address while the one on the remote machine has the HOST'S IP address.
+> The two .ui_info files should be identical EXCEPT for the IP addresses
 
 ### Dropbox Headless (Docker)
 > Cloud Storage
