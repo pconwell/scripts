@@ -246,14 +246,14 @@ password=samba_user_password
 1. Install Crashplan Docker:
 
 ```
-docker run --restart=always -d \
+sudo docker run --restart=always -d \
   --name crashplan \
   -h $HOSTNAME \
   -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" \
   --publish 4242:4242 --publish 4243:4243 \
   --volume /backup:/backups \
   --volume /plex_mount:/videos \
-  --volume /picture:/pictures \
+  --volume /pictures:/pictures \
   --volume /dropbox:/dropbox \
   --volume /share:/shared \
   jrcs/crashplan:latest
