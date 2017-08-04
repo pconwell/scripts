@@ -246,7 +246,7 @@ password=samba_user_password
 1. Install Crashplan Docker:
 
 ```
-docker run -d \
+docker run --restart=always -d \
   --name crashplan \
   -h $HOSTNAME \
   -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" \
