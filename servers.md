@@ -111,6 +111,20 @@
 ## Plex Repo
 > https://support.plex.tv/hc/en-us/articles/235974187-Enable-repository-updating-for-supported-Linux-server-distributions
 
+## Virtualbox Headless
+> For windows 10 install. Make sure virtualization is enabled in the bios on the server before starting.
+
+1. `$ sudo apt-get install virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso`
+2. Download latest windows 10 iso (64 bit) to /home
+3. `$ VBoxManage createvm --name "Windows" -ostype Windows10_64 --register`
+4. `$ VBoxManage modifyvm "Windows" --memory 8192 --acpi on --boot1 dvd --nic1 nat`
+5. `$ VBoxManage createhd --filename "win10.vdi" --size 50000`
+6. `$ VBoxManage storagectl "Windows" --name "IDE Controller" --add ide --controller PIIX4`
+7. `$ VBoxManage storageattach "Windows" --storagectl "IDE Controller" --port 0 --device 0 --type hdd --medium "win10.vdi"`
+8. `$ VBoxManage storageattach "Windows" --storagectl "IDE Controller" --port 0 --device 1 --type dvddrive --medium ~/Win10_1703_English_x64.iso`
+> replace Win10_1703_English_x64.iso with name of current windows 10 iso
+9. `$ VBoxManage modifyvm "Windows" --vrde on`
+10. `$ VBoxHeadless --startvm "Windows"`
 
 
 # rick (poweredge 850)
