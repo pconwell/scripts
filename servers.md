@@ -1,3 +1,7 @@
+# morty 2.0 (ESXi / vSphere)
+> First, you need to navigate the needlessly complex website for vmware. Most likely, you will want this: https://www.vmware.com/go/get-free-esxi which is the free version of ESXi. Getting the download to work can be a major pain in the ass and I have so far been unsucessful in downloading the iso.
+
+
 # morty (poweredge r710)
 
 ## Quick Stats
