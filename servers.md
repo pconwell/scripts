@@ -126,6 +126,17 @@
 9. `$ VBoxManage modifyvm "windows" --vrde on`
 10. `$ VBoxHeadless --startvm "windows"`
 
+Once you start the vm, you will need to connect via RDP and the *host's* IP address. Once you have connected via RDP and installed your guest OS, and everything is up and running, you will need to install the guest additions.
+
+1. Shut down your guest OS
+2. `$ wget http://download.virtualbox.org/virtualbox/5.0.40/VBoxGuestAdditions_5.0.40.iso`
+> Check your version of virtualbox and download the correct version
+3. `$ VBoxManage storageattach "windows" --storagectl "IDE Controller" --port 0 --device 1 --type dvddrive --medium ~/VBoxGuestAdditions_5.0.40.iso`
+4. Restart the guest and using the guest's file explorer, open the attached 'CD' and install the guest additions.
+5. `$  VBoxManage storageattach "windows" --storagectl "IDE Controller" --port 0 --device 1 --medium none`
+> Shut down the guest again and detatch the iso
+6. Restart the guest OS and everything should be good
+
 
 # rick (poweredge 850)
 
