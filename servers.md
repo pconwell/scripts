@@ -149,6 +149,11 @@
 ## Plex Repo
 > https://support.plex.tv/hc/en-us/articles/235974187-Enable-repository-updating-for-supported-Linux-server-distributions
 
+1. `$ echo deb https://downloads.plex.tv/repo/deb ./public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list`
+2. `$ curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -`
+3. `$ sudo apt-get update`
+4. `$ sudo apt-get install plexmediaserver`
+
 ## Virtualbox Headless
 > For windows 10 install. Make sure virtualization is enabled in the bios on the server before starting.
 
