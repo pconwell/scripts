@@ -1,6 +1,10 @@
 # morty 2.0 (ESXi / vSphere)
 > First, you need to navigate the needlessly complex website for vmware. Most likely, you will want this: https://www.vmware.com/go/get-free-esxi which is the free version of ESXi. Getting the download to work can be a major pain in the ass and I have so far been unsucessful in downloading the iso.
 
+> Not gonna lie, ended up downloading the .iso from a questionable website. Literally could not get the .iso to download from vmware's website. The MD5 sum checks out, so I'm not concerned about it's legitimacy. MD5SUM: cee025ba50f118d8b06a8025bd1134d5.
+
+1. burn image to disk (haven't had luck with bootable USBs lately...)
+2. 
 
 # morty (poweredge r710)
 
