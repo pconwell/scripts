@@ -135,7 +135,11 @@ Once you start the vm, you will need to connect via RDP and the *host's* IP addr
 4. Restart the guest and using the guest's file explorer, open the attached 'CD' and install the guest additions.
 5. `$  VBoxManage storageattach "windows" --storagectl "IDE Controller" --port 0 --device 1 --medium none`
 > Shut down the guest again and detatch the iso
-6. Restart the guest OS and everything should be good
+6. Restart the guest OS and everything should be good.
+
+Once everything is good to go and you are happy, run the VM as a background, detached process:
+
+`$ VBoxManage startvm "windows" --type headless`
 
 
 # rick (poweredge 850)
