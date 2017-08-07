@@ -1,10 +1,15 @@
 # morty 2.0 (ESXi / vSphere)
 > First, you need to navigate the needlessly complex website for vmware. Most likely, you will want this: https://www.vmware.com/go/get-free-esxi which is the free version of ESXi. Getting the download to work can be a major pain in the ass and I have so far been unsucessful in downloading the iso.
 
-> Not gonna lie, ended up downloading the .iso from a questionable website. Literally could not get the .iso to download from vmware's website. The MD5 sum checks out, so I'm not concerned about it's legitimacy. MD5SUM: cee025ba50f118d8b06a8025bd1134d5.
+> Not gonna lie, ended up downloading the .iso from a questionable website. Literally could not get the .iso to download from vmware's website. The MD5 sum checks out, so I'm not concerned about it's legitimacy. Current Version: VMware ESXi 6.5.0 () MD5SUM: cee025ba50f118d8b06a8025bd1134d5.
 
-1. burn image to disk (haven't had luck with bootable USBs lately...)
-2. 
+1. (optional) install internal USB key, min 4 GB. ESXi did not recognize my USB key so I installed to primary HDD.
+2. burn image to disk (haven't had luck with bootable USBs lately...)
+3. boot to disk. It's slow so be prepared to wait a good 10 minutes or more while it boots to the disk.
+4. follow on screen instructions. It's pretty straight forward. Install is relatively quick.
+5. reboot. You should eventually see a screen that looks a lot like the install screen.
+6. Once it's booted up, navigate to your server's IP address (or host name) using your browser. Username/Password is root/your_password_you_entered_during_install
+7. If that is all sucessful, you have finished the ESXi install.
 
 # morty (poweredge r710)
 
