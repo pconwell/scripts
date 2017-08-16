@@ -338,6 +338,10 @@ $ docker exec -it crashplan bash
 ```
 Make a note of the `.ui_info` file.
 
+> ui.properties
+
+> my.services.xml
+
 #### Frontend
 
 1. If you have a current install, back up your `.ui_info` file. It can be found at `C:\ProgramData\CrashPlan\.ui_info`
