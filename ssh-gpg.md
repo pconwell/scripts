@@ -28,7 +28,7 @@
 \* This is frowned upon. The 'correct' way is to only sign important commits, tags, releases, etc. The proper way is to use `$ git commit -S -m "your commit message"`, however I honestly don't see it as an issue and I'm lazy so I prefer to just sign everything.
 
 ## .gitconfig
-
+```
 [user]
 	name = pconwell (home|work)
 	email = email
@@ -47,3 +47,4 @@
 	pushall = "!find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} push --all \\;"
 [commit]
 	gpgsign = true
+```
