@@ -26,3 +26,24 @@
 7. `$ git config --global commit.gpgsign true` (optional: to sign ALL commits\*)
 
 \* This is frowned upon. The 'correct' way is to only sign important commits, tags, releases, etc. The proper way is to use `$ git commit -S -m "your commit message"`, however I honestly don't see it as an issue and I'm lazy so I prefer to just sign everything.
+
+## .gitconfig
+
+[user]
+	name = pconwell (home|work)
+	email = email
+	signingkey = gpg key from step #2 above
+[core]
+	autocrlf = true
+	safecrlf = false
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:'%G? %C(white)%h %C(green)%ad %C(bold)%C(green)| %C(dim)%C(green)[%C(bold)%C(cyan)%an%C(dim)%C(green)] %C(bold)%C(normal)%s%d' --graph
+	type = cat-file -t
+	dump = cat-file -p
+	pushall = "!find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} push --all \\;"
+[commit]
+	gpgsign = true
