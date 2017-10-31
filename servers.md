@@ -1,3 +1,133 @@
+# morty 3.0 (ESXi 6.5)
+
+## Docker VM
+
+```
+$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common 
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo apt-key fingerprint 0EBFCD88
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+$ sudo apt-get update
+$ sudo apt-get install docker-ce 
+$ sudo docker run hello-world
+
+$ cat /proc/sys/fs/inotify/max_user_watches 
+$ sudo nano /etc/sysctl.conf 
+$ sudo sysctl -p /etc/sysctl.conf 
+$ cat /proc/sys/fs/inotify/max_user_watches 
+
+$ sudo docker run --restart=always -d --name=crashplan-pro -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 5800:5800 -v /docker/appdata/crashplan-pro:/config -v /backups:/backups -v /movies:/videos -v /shows:/shows -v /photos:/pictures -v /dropbox:/dropbox -v /shared:/shared jlesage/crashplan-pro
+
+$ sudo nano /etc/fstab 
+$ sudo mount -a
+
+$ sudo groupadd docker
+$ sudo usermod -aG docker pconwell
+$ exit
+$ groups
+$ docker run hello-world
+$ sudo shutdown now -r
+```
+### Crashplan
+
+```
+sudo docker run --restart=always -d --name=crashplan-pro -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 5800:5800 -v /docker/appdata/crashplan-pro:/config -v /backups:/backups -v /movies:/videos -v /shows:/shows -v /photos:/pictures -v /dropbox:/dropbox -v /shared:/shared jlesage/crashplan-pro
+```
+
+## Files VM
+
+### Samba
+
+```
+[movies]
+browseable = yes
+path = /movies/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[shows]
+browseable = yes
+path = /shows/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[photos]
+browseable = yes
+path = /photos/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[backups]
+browseable = yes
+path = /backups/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[shared]
+browseable = yes
+path = /shared/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+
+[dropbox]
+browseable = yes
+path = /dropbox/
+guest ok = yes
+force user = pconwell
+force group = pconwell
+read only = no
+create mask = 664
+force create mode = 644
+directory mask = 755
+force directory mode = 755
+```
+
+```
+$ sudo chown pconwell:pconwell /movies/
+$ sudo chown pconwell:pconwell /shows/
+$ sudo chown pconwell:pconwell /backups/
+$ sudo chown pconwell:pconwell /shared/
+$ sudo chown pconwell:pconwell /dropbox/
+```
+
+`$ sudo service smbd restart`
+
+## Windows VM
+
+------------
+------------
+------------
+
 # morty 2.0 (ESXi / vSphere)
 
 ## Install ESXi
