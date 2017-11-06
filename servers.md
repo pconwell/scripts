@@ -33,6 +33,32 @@ $ sudo shutdown now -r
 ```
 sudo docker run --restart=always -d --name=crashplan-pro -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 5800:5800 -v /docker/appdata/crashplan-pro:/config -v /backups:/backups -v /movies:/videos -v /shows:/shows -v /photos:/pictures -v /dropbox:/dropbox -v /shared:/shared jlesage/crashplan-pro
 ```
+### Plex
+> You will need to replace the claim code with your own claim code. https://www.plex.tv/claim/
+
+```
+docker run -d --name plex --network=host -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -e PLEX_CLAIM="CLAIM-WYFGBDI7WAVJBGMPQ4NY" -v ~/.plex/config:/config -v ~/.plex/transcode:/transcode -v /movies:/movies -v /shows:/shows plexinc/pms-docker
+```
+
+### RStudio
+> To access outside network, set up port fowarding to port 8787
+
+```
+docker run -d -p 8787:8787 rocker/rstudio
+```
+
+### Dokuwiki
+
+```
+docker run -d -p 8888:80 --name dokuwiki pconwell/dokuwiki
+```
+
+### Dropbox
+> You will need to go into `$ docker logs dropbox` to set up and link your account.
+
+```
+docker run -d --restart=always --name=dropbox -v /dropbox/:/dbox/Dropbox -e DBOX_UID=1000 -e DBOX_GID=1000 janeczku/dropbox
+```
 
 ## Files VM
 
@@ -123,6 +149,13 @@ $ sudo chown pconwell:pconwell /dropbox/
 `$ sudo service smbd restart`
 
 ## Windows VM
+> Nothing special.
+
+------------
+------------
+------------
+
+###########
 
 ------------
 ------------
