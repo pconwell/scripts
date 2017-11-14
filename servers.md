@@ -94,6 +94,7 @@ docker run -d --restart=always --name=dropbox -v /dropbox/:/dbox/Dropbox -e DBOX
 #### Handbrake
 
 ```
+docker run -d --rm --name=handbrake_movies -p 5880:5800 -p 5900:5900 -v /docker/appdata/handbrake_movies:/config:rw -v $HOME:/storage:ro -v /movies/to_convert:/watch:rw -v /movies/movies_rips:/output:rw jlesage/handbrake
 ```
 
 ### Files VM
