@@ -37,7 +37,7 @@ sudo docker run --restart=always -d --name=crashplan-pro -e TZ="${TZ:-$(cat /etc
 > You will need to replace the claim code with your own claim code. https://www.plex.tv/claim/
 
 ```
-docker run -d --name plex --network=host -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -e PLEX_CLAIM="CLAIM-WYFGBDI7WAVJBGMPQ4NY" -v ~/.plex/config:/config -v ~/.plex/transcode:/transcode -v /movies:/movies -v /shows:/shows plexinc/pms-docker
+docker run -d --name plex --network=host -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -e PLEX_CLAIM="CLAIM-..." -v ~/.plex/config:/config -v ~/.plex/transcode:/transcode -v /movies:/movies -v /shows:/shows plexinc/pms-docker:public
 ```
 
 ### RStudio
