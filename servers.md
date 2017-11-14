@@ -1,15 +1,13 @@
-# morty 3.0 (ESXi 6.5)
+## morty 3.0 (ESXi 6.5)
 
-## Install ESXi
+### Install ESXi
 > First, you need to navigate the needlessly complex website for vmware. Most likely, you will want this: https://www.vmware.com/go/get-free-esxi which is the free version of ESXi. Getting the download to work can be a major pain in the ass and I have so far been unsucessful in downloading the iso.
 
-> Not gonna lie, ended up downloading the .iso from a questionable website. Literally could not get the .iso to download from vmware's website. The MD5 sum checks out, so I'm not concerned about it's legitimacy. Current Version: VMware ESXi 6.5.0 () MD5SUM: cee025ba50f118d8b06a8025bd1134d5.
-
-1. (optional) install internal USB key, min 4 GB. ESXi did not recognize my USB key so I installed to primary HDD.
+1. install internal SD Card, min 16 GB.
 2. burn image to disk (haven't had luck with bootable USBs lately...)
 3. boot to disk. It's slow so be prepared to wait a good 10 minutes or more while it boots to the disk.
-4. follow on screen instructions. It's pretty straight forward. Install is relatively quick.
-5. reboot. You should eventually see a screen that looks a lot like the install screen.
+4. follow on screen instructions. It's pretty straight forward. Install is relatively quick. Just make sure you install to the internal SD card and not the HDD.
+5. reboot. You should eventually see a screen that looks a lot like the install screen. (if not, make sure you have set USB to boot in the BIOS).
 6. Once it's booted up, navigate to your server's IP address (or host name) using your browser. Username/Password is root/your_password_you_entered_during_install
 7. If that is all sucessful, you have finished the ESXi install.
 
@@ -17,7 +15,6 @@
 
 ## Provisioning Disks
 > Most likely, previous disks (if you have multiple disks) will need to be formatted for vm. Under 'Storage', click the disk (or array) you want to use. Click 'New Datastore', then give it a name. Format as appropriate.
-
 
 ## Install a Guest/Client
 1. Click 'Virual Machines' on the left.
@@ -34,7 +31,7 @@
 10. Enter into the console. The console is basically an HTML5 RDP client.
 11. Install guest OS.
 
-## Docker VM
+### Docker VM
 
 ```
 $ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common 
@@ -62,41 +59,46 @@ $ groups
 $ docker run hello-world
 $ sudo shutdown now -r
 ```
-### Crashplan
+#### Crashplan
 
 ```
 sudo docker run --restart=always -d --name=crashplan-pro -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 5800:5800 -v /docker/appdata/crashplan-pro:/config -v /backups:/backups -v /movies:/videos -v /shows:/shows -v /photos:/pictures -v /dropbox:/dropbox -v /shared:/shared jlesage/crashplan-pro
 ```
-### Plex
+#### Plex
 > You will need to replace the claim code with your own claim code. https://www.plex.tv/claim/
 
 ```
 docker run -d --name plex --network=host -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -e PLEX_CLAIM="CLAIM-..." -v ~/.plex/config:/config -v ~/.plex/transcode:/transcode -v /movies:/movies -v /shows:/shows plexinc/pms-docker:public
 ```
 
-### RStudio
+#### RStudio
 > To access outside network, set up port fowarding to port 8787
 
 ```
 docker run -d -p 8787:8787 rocker/rstudio
 ```
 
-### Dokuwiki
+#### Dokuwiki
 
 ```
 docker run -d -p 8888:80 --name dokuwiki pconwell/dokuwiki
 ```
 
-### Dropbox
+#### Dropbox
 > You will need to go into `$ docker logs dropbox` to set up and link your account.
 
 ```
 docker run -d --restart=always --name=dropbox -v /dropbox/:/dbox/Dropbox -e DBOX_UID=1000 -e DBOX_GID=1000 janeczku/dropbox
 ```
 
-## Files VM
+#### Handbrake
 
-### Samba
+```
+```
+
+### Files VM
+
+#### Samba
 
 ```
 [movies]
@@ -182,16 +184,16 @@ $ sudo chown pconwell:pconwell /dropbox/
 
 `$ sudo service smbd restart`
 
-## Windows VM
+### Windows VM
 > Nothing special.
 
 ------------
 ------------
 ------------
 
-# Laptop (Docker)
+## Laptop (Docker)
 
-## MakeMKV
+### MakeMKV
 > This will need to be installed on the laptop because otherwise accessing the DVD drive on the server will be a hassle
 
 > Create two different docker images -- one for movies and one for shows. You don't HAVE to do this, but due to the low overhead of containers, no reason NOT to create two containers with separate settings already configured for movies and shows.
