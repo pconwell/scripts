@@ -18,6 +18,11 @@ To start docker on host system boot: `$ sudo systemctl enable docker`
 
 To test installation: `$ docker run hello-world`
 
+### MakeMKV
+```
+docker run -d --name=makemkv -p 5800:5800 -e USER_ID=1000 -e GROUP_ID=1000 -v ~/.makemkv/config/:/config:rw -v ~/.makemkv/storage/:/storage:ro -v ~/.makemkv/output/:/output:rw --device /dev/sr0 --device /dev/sg1 jlesage/makemkv
+```
+
 
 ### unifi
 
