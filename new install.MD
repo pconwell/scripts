@@ -35,8 +35,11 @@ $ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
 ```
 
 ### Horizon Client
-> Enable partner sources
-`$ sudo apt-get install vmware-view-client`
+```
+$ wget https://download3.vmware.com/software/view/viewclients/CART18FQ4/VMware-Horizon-Client-4.7.0-7395152.x64.bundle
+$ chmod +x VMware-Horizon-Client-4.7.0-7395152.x64.bundle 
+$ sudo ./VMware-Horizon-Client-4.7.0-7395152.x64.bundle
+```
 
 
 ## Python
