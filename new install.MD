@@ -48,6 +48,14 @@ $ chmod +x VMware-Horizon-Client-4.7.0-7395152.x64.bundle
 $ sudo ./VMware-Horizon-Client-4.7.0-7395152.x64.bundle
 ```
 
+### atom
+```
+$ sudo apt-get install gconf-service gconf-service-backend gconf2 gconf2-common libgconf-2-4
+$ curl -J -L -o atom.deb https://atom.io/download/deb
+$ sudo dpkg -i atom.deb
+```
+
+
 ----
 
 
