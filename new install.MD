@@ -1,6 +1,7 @@
-$ sudo apt-get update && sudo apt-get upgrade -y
+`$ sudo apt-get update && sudo apt-get upgrade -y`
 
 ### docker
+```
 $ sudo apt-get install chromium-browser
 $ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -11,25 +12,33 @@ $ sudo groupadd docker
 $ sudo usermod -aG docker $USER
 $ sudo systemctl enable docker
 $ sudo shutdown now -r
+```
 
 ### filebot
+```
 $ sudo apt-get install openjdk-8-jre openjfx
 $ sudo dpkg -i ~/filebot_4.7.9_amd64.deb
+```
 
 ### python
+```
 $ sudo apt-get install python3 python3-pip
 $ echo "# Python3 alias" >> .bashrc
 $ echo "alias python=python3" >> .bashrc
 $ echo "alias pip=pip3" >> .bashrc
+```
 
 ### R / RStudio
+```
 $ sudo apt-get install r-base r-base-dev libjpeg62
 $ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
-
+```
 
 
 ## Python
+```
 pip install jupyter --user
+```
 
 ## R / RStudio
 
