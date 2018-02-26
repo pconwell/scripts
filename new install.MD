@@ -34,6 +34,10 @@ $ sudo apt-get install r-base r-base-dev libjpeg62
 $ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
 ```
 
+### Horizon Client
+> Enable partner sources
+`$ sudo apt-get install vmware-view-client`
+
 
 ## Python
 ```
