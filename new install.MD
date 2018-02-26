@@ -1,8 +1,13 @@
 `$ sudo apt-get update && sudo apt-get upgrade -y`
 
-### docker
+### chromium
 ```
 $ sudo apt-get install chromium-browser
+```
+
+
+### docker
+```
 $ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 $ apt-key fingerprint 0EBFCD88
