@@ -1,5 +1,7 @@
 `$ sudo apt-get update && sudo apt-get upgrade -y`
 
+----
+
 ### chromium
 ```
 $ sudo apt-get install chromium-browser
@@ -46,6 +48,8 @@ $ chmod +x VMware-Horizon-Client-4.7.0-7395152.x64.bundle
 $ sudo ./VMware-Horizon-Client-4.7.0-7395152.x64.bundle
 ```
 
+----
+
 
 ## Python
 ```
@@ -55,7 +59,7 @@ pip install jupyter --user
 ## R / RStudio
 
 
-
+----
 
 
 
