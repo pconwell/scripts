@@ -86,7 +86,7 @@ $ sudo apt-get install git
 $ sudo apt-get install xclip
 $ xclip -sel clip < ~/.ssh/id_rsa.pub
 ```
-> Copy and paste ssh key to github
+> Copy and paste ssh key to github: https://github.com/settings/ssh/new
 ```
 $ git config --global user.email "you@example.com"
 $ git config --global user.name "Your Name"
