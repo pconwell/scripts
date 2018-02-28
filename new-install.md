@@ -38,6 +38,7 @@ $ echo "alias pip=pip3" >> .bashrc
 ### libraries
 ```
 $ sudo pip3 install --upgrade --force-reinstall --no-cache-dir jupyter
+$ pip3 install rpy2
 $ pip3 install numpy --user
 $ pip3 install matplotlib --user
 $ pip3 install pandas --user
@@ -47,6 +48,13 @@ $ pip3 install pandas --user
 ```
 $ sudo apt-get install r-base r-base-dev libjpeg62
 $ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
+```
+
+### jupyter
+```
+$ sudo add-apt-repository ppa:chronitis/jupyter
+$ sudo apt-get update
+$ sudo apt-get install <kernelname>
 ```
 
 ### libraries
