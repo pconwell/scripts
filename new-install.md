@@ -68,14 +68,25 @@ $ curl -J -L -o atom.deb https://atom.io/download/deb
 $ sudo dpkg -i atom.deb
 ```
 
+## ssh
+```
+$ ssh-keygen -t rsa -b 4096 -C "your@email.tld"
+```
+
+
 ## git
 ```
-sudo apt-add-repository ppa:git-core/ppa
-sudo apt-get update
-sudo apt-get install git
+$ sudo apt-add-repository ppa:git-core/ppa
+$ sudo apt-get update
+$ sudo apt-get install git
 ```
 
 ### config
+```
+$ sudo apt-get install xclip
+$ xclip -sel clip < ~/.ssh/id_rsa.pub
+```
+> Copy and paste ssh key to github
 ```
 $ git config --global user.email "you@example.com"
 $ git config --global user.name "Your Name"
