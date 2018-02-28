@@ -111,3 +111,12 @@ $ read -p "username: " user; read -s -p "password: " pass; read -p "2FA code: " 
 ```
 $ sudo apt-get install texlive texstudio
 ```
+## vlc
+```
+$ sudo apt-get install vlc
+```
+
+## brasero
+```
+$ sudo apt-get install brasero
+```
