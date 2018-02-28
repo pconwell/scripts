@@ -79,7 +79,7 @@ $ ssh-keygen -t rsa -b 4096 -C "your@email.tld"
 $ gpg --gen-key
 ```
 
-## git
+## git / github
 ```
 $ sudo apt-add-repository ppa:git-core/ppa
 $ sudo apt-get update
@@ -97,11 +97,11 @@ $ git config --global core.safecrlf warn
 $ git config --global alias.unstage "reset HEAD --"
 $ git config --global alias.hist "log --pretty=format:'%G? %C(white)%h %C(green)%ad %C(bold)%C(green)| %C(dim)%C(green)[%C(bold)%C(cyan)%an%C(dim)%C(green)] %C(bold)%C(normal)%s%d' --graph"
 
-$ key=`cat ~/.ssh/id_rsa.pub`; read -p "Title for key: " title; read -p "username: " user; read -s -p "password: " pass; read -p "2FA code: " otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"title":"'"$title"'","key":"'"$key"'"}' https://api.github.com/user/keys
+$ read -p "Title for key: " title; read -p "username: " user; read -s -p "password: " pass; read -p "2FA code: " otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"title":"'"$title"'","key":"'"`cat ~/.ssh/id_rsa.pub`"'"}' https://api.github.com/user/keys
 
 $ git config --global user.signingkey `gpg --list-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'`
 $ git config --global commit.gpgsign true
-$ key=$(gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'); read -p "username: " user; read -s -p "password: " pass; read -p "2FA code: " otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"armored_public_key":"'"$key"'"}' https://api.github.com/user/gpg_keys
+$ read -p "username: " user; read -s -p "password: " pass; read -p "2FA code: " otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"armored_public_key":"'"$(gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')"'"}' https://api.github.com/user/gpg_keys
 ```
 
 ## latex
