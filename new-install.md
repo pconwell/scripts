@@ -99,7 +99,7 @@ $ git config --global alias.unstage "reset HEAD --"
 $ git config --global alias.hist "log --pretty=format:'%G? %C(white)%h %C(green)%ad %C(bold)%C(green)| %C(dim)%C(green)[%C(bold)%C(cyan)%an%C(dim)%C(green)] %C(bold)%C(normal)%s%d' --graph"
 
 $ gpg --gen-key
-$ git config --global user.signingkey `gpg --list-keys | head -4 | tail -1 | tr -d ' '`
+$ git config --global user.signingkey `gpg --list-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'`
 $ git config --global commit.gpgsign true
 $ key=$(gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'); echo "Enter username: "; read user; echo "Enter password: "; read pass; echo "Enter 2fa code: "; read otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"armored_public_key":"'"$key"'"}' https://api.github.com/user/gpg_keys
 ```
