@@ -2,8 +2,6 @@
 
 `$ sudo apt-get update && sudo apt-get upgrade -y`
 
-----
-
 ## chromium
 ```
 $ sudo apt-get install chromium-browser
