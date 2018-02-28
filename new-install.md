@@ -69,8 +69,14 @@ $ sudo dpkg -i atom.deb
 ```
 
 ## ssh
+### generate key
 ```
 $ ssh-keygen -t rsa -b 4096 -C "your@email.tld"
+```
+
+### add key to github
+```
+$ key=`cat ~/.ssh/id_rsa.pub`; echo "Enter title for key: "; read title; echo "Enter user name: "; read user; echo "Enter password: "; read pass; echo "Enter 2fa code: "; read otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"title":"'"$title"'","key":"'"$key"'"}' https://api.github.com/user/keys
 ```
 
 
@@ -82,11 +88,6 @@ $ sudo apt-get install git
 ```
 
 ### config
-```
-$ sudo apt-get install xclip
-$ xclip -sel clip < ~/.ssh/id_rsa.pub
-```
-> Copy and paste ssh key to github: https://github.com/settings/ssh/new
 ```
 $ git config --global user.email "you@example.com"
 $ git config --global user.name "Your Name"
@@ -100,9 +101,8 @@ $ git config --global alias.hist "log --pretty=format:'%G? %C(white)%h %C(green)
 $ gpg --gen-key
 $ git config --global user.signingkey `gpg --list-keys | head -4 | tail -1 | tr -d ' '`
 $ git config --global commit.gpgsign true
-$ gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | xclip -sel clip
+$ key=$(gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g'); echo "Enter username: "; read user; echo "Enter password: "; read pass; echo "Enter 2fa code: "; read otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"armored_public_key":"'"$key"'"}' https://api.github.com/user/gpg_keys
 ```
-> the above command will place your key in the clipboard. Copy and paste the key to github: https://github.com/settings/gpg/new
 
 ## latex
 ```
