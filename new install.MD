@@ -1,14 +1,16 @@
+## initial
+
 `$ sudo apt-get update && sudo apt-get upgrade -y`
 
 ----
 
-### chromium
+## chromium
 ```
 $ sudo apt-get install chromium-browser
 ```
 
 
-### docker
+## docker
 ```
 $ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -21,13 +23,13 @@ $ sudo systemctl enable docker
 $ sudo shutdown now -r
 ```
 
-### filebot
+## filebot
 ```
 $ sudo apt-get install openjdk-8-jre openjfx
 $ sudo dpkg -i ~/filebot_4.7.9_amd64.deb
 ```
 
-### python
+## python
 ```
 $ sudo apt-get install python3 python3-pip
 $ echo "# Python3 alias" >> .bashrc
@@ -35,18 +37,18 @@ $ echo "alias python=python3" >> .bashrc
 $ echo "alias pip=pip3" >> .bashrc
 ```
 
-#### Libraries
+### libraries
 ```
 $ pip install jupyter --user
 ```
 
-### R / RStudio
+## r / rstudio
 ```
 $ sudo apt-get install r-base r-base-dev libjpeg62
 $ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
 ```
 
-#### libraries
+### libraries
 > Need to update this section with actual packages I need.
 
 ```
@@ -54,28 +56,28 @@ $ install.packages(c("tidyverse","data.table","dtplyr","devtools","roxygen2","bi
 $ install.packages(c("knitr","rmarkdown"), repos='http://cran.us.r-project.org')
 ```
 
-### Horizon Client
+## horizon client
 ```
 $ wget https://download3.vmware.com/software/view/viewclients/CART18FQ4/VMware-Horizon-Client-4.7.0-7395152.x64.bundle
 $ chmod +x VMware-Horizon-Client-4.7.0-7395152.x64.bundle 
 $ sudo ./VMware-Horizon-Client-4.7.0-7395152.x64.bundle
 ```
 
-### atom
+## atom
 ```
 $ sudo apt-get install gconf-service gconf-service-backend gconf2 gconf2-common libgconf-2-4
 $ curl -J -L -o atom.deb https://atom.io/download/deb
 $ sudo dpkg -i atom.deb
 ```
 
-### git
+## git
 ```
 sudo apt-add-repository ppa:git-core/ppa
 sudo apt-get update
 sudo apt-get install git
 ```
 
-#### config
+### config
 ```
 $ git config --global user.email "you@example.com"
 $ git config --global user.name "Your Name"
