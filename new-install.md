@@ -29,7 +29,7 @@ $ sudo dpkg -i ~/filebot_4.7.9_amd64.deb
 
 ## python
 ```
-$ sudo apt-get install python3 python3-pip
+$ sudo apt-get install python3 python3-pip jupyter-core
 $ echo "# Python3 alias" >> .bashrc
 $ echo "alias python=python3" >> .bashrc
 $ echo "alias pip=pip3" >> .bashrc
@@ -37,7 +37,10 @@ $ echo "alias pip=pip3" >> .bashrc
 
 ### libraries
 ```
-$ pip install jupyter --user
+$ sudo pip3 install --upgrade --force-reinstall --no-cache-dir jupyter
+$ pip3 install numpy --user
+$ pip3 install matplotlib --user
+$ pip3 install pandas --user
 ```
 
 ## r / rstudio
