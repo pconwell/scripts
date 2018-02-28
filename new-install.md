@@ -100,9 +100,9 @@ $ git config --global alias.hist "log --pretty=format:'%G? %C(white)%h %C(green)
 $ gpg --gen-key
 $ git config --global user.signingkey `gpg --list-keys | head -4 | tail -1 | tr -d ' '`
 $ git config --global commit.gpgsign true
-$ gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'`
+$ gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | xclip -sel clip
 ```
-> copy and paste the entire public key block to your github gpg keys
+> the above command will place your key in the clipboard. Copy and paste the key to github: https://github.com/settings/gpg/new
 
 ## latex
 ```
