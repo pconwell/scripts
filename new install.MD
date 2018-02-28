@@ -55,6 +55,13 @@ $ curl -J -L -o atom.deb https://atom.io/download/deb
 $ sudo dpkg -i atom.deb
 ```
 
+### git
+```
+sudo apt-add-repository ppa:git-core/ppa
+sudo apt-get update
+sudo apt-get install git
+```
+
 
 ----
 
