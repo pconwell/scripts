@@ -94,3 +94,8 @@ $ gpg --list-secret-keys --keyid-format LONG
 $ gpg --armor --export <your secret key>
 ```
 > copy and paste the entire public key block to your github gpg keys
+
+## latex
+```
+$ sudo apt-get install texlive texstudio
+```
