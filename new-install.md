@@ -50,19 +50,21 @@ $ sudo apt-get install r-base r-base-dev libjpeg62
 $ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
 ```
 
+### libraries
+> Need to update this section with actual packages I need.
+
+```
+installr, RSelenium, 
+
+$ install.packages(c("tidyverse","data.table","dtplyr","devtools","roxygen2","bit64"), repos = "https://cran.rstudio.com/")
+$ install.packages(c("knitr","rmarkdown"), repos='http://cran.us.r-project.org')
+```
+
 ### jupyter
 ```
 $ sudo add-apt-repository ppa:chronitis/jupyter
 $ sudo apt-get update
 $ sudo apt-get install <kernelname>
-```
-
-### libraries
-> Need to update this section with actual packages I need.
-
-```
-$ install.packages(c("tidyverse","data.table","dtplyr","devtools","roxygen2","bit64"), repos = "https://cran.rstudio.com/")
-$ install.packages(c("knitr","rmarkdown"), repos='http://cran.us.r-project.org')
 ```
 
 ## horizon client
