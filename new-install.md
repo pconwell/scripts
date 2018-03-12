@@ -42,6 +42,10 @@ $ pip3 install rpy2
 $ pip3 install numpy --user
 $ pip3 install matplotlib --user
 $ pip3 install pandas --user
+sklearn
+scipy
+
+apt-get install python3-tk
 ```
 
 ## r / rstudio
