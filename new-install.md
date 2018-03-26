@@ -49,7 +49,11 @@ apt-get install python3-tk
 ```
 
 ## r / rstudio
+> add `deb https://cloud.r-project.org/bin/linux/ubuntu artful/` to `/etc/apt/source.list`
+
 ```
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+$ sudo apt-get update
 $ sudo apt-get install r-base r-base-dev libjpeg62
 $ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
 ```
