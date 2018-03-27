@@ -89,6 +89,11 @@ $ curl -J -L -o atom.deb https://atom.io/download/deb
 $ sudo dpkg -i atom.deb
 ```
 
+## Node.js / Electron / npm
+```
+$ sudo apt-get install nodejs npm
+```
+
 ## ssh / gpg
 ### generate ssh key
 ```
