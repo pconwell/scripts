@@ -1,97 +1,45 @@
+# Ubuntu 18.04 b2 (minimal)
+
 ## initial
 
-`$ sudo apt-get update && sudo apt-get upgrade -y`
+`$ sudo apt-get update && sudo apt-get dist-upgrade -y`
 
 ## chromium
 ```
 $ sudo apt-get install chromium-browser
 ```
 
-
-## docker
-```
-$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-$ apt-key fingerprint 0EBFCD88
-$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-$ sudo apt-get update && sudo apt-get install docker-ce
-$ sudo groupadd docker
-$ sudo usermod -aG docker $USER
-$ sudo systemctl enable docker
-$ sudo shutdown now -r
-```
-
-## filebot
-```
-$ sudo apt-get install openjdk-8-jre openjfx
-$ sudo dpkg -i ~/filebot_4.7.9_amd64.deb
-```
-
 ## python
 ```
-$ sudo apt-get install python3 python3-pip jupyter-core
+$ sudo apt-get install python3 python3-pip
 $ echo "# Python3 alias" >> .bashrc
 $ echo "alias python=python3" >> .bashrc
 $ echo "alias pip=pip3" >> .bashrc
+$ echo "alias pip=pip3" >> .bashrc
 ```
 
-### libraries
+## latex
 ```
-$ sudo pip3 install --upgrade --force-reinstall --no-cache-dir jupyter
-$ pip3 install rpy2
-$ pip3 install numpy --user
-$ pip3 install matplotlib --user
-$ pip3 install pandas --user
-sklearn
-scipy
-
-apt-get install python3-tk
+$ sudo apt-get install texlive texlive-latex-extra texstudio
 ```
 
 ## r / rstudio
-> add `deb https://cloud.r-project.org/bin/linux/ubuntu artful/` to `/etc/apt/source.list`
+
+> Download RStudio: https://www.rstudio.com/products/rstudio/download/#download
 
 ```
-$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-$ sudo apt-get update
 $ sudo apt-get install r-base r-base-dev libjpeg62
-$ sudo dpkg -i ~/rstudio-xenial-1.1.423-amd64.deb
-```
-
-### libraries
-> Need to update this section with actual packages I need.
-
-```
-installr, RSelenium, 
-
-$ install.packages(c("tidyverse","data.table","dtplyr","devtools","roxygen2","bit64"), repos = "https://cran.rstudio.com/")
-$ install.packages(c("knitr","rmarkdown"), repos='http://cran.us.r-project.org')
-```
-
-### jupyter
-```
-$ sudo add-apt-repository ppa:chronitis/jupyter
-$ sudo apt-get update
-$ sudo apt-get install <kernelname>
+$ sudo dpkg -i ~/Downloads/rstudio-xenial-1.1.442-amd64.deb
 ```
 
 ## horizon client
+
+> Current Version: https://my.vmware.com/web/vmware/details?downloadGroup=CART18FQ4_LIN64_470&productId=578&rPId=20573
+
 ```
 $ wget https://download3.vmware.com/software/view/viewclients/CART18FQ4/VMware-Horizon-Client-4.7.0-7395152.x64.bundle
 $ chmod +x VMware-Horizon-Client-4.7.0-7395152.x64.bundle 
 $ sudo ./VMware-Horizon-Client-4.7.0-7395152.x64.bundle
-```
-
-## atom
-```
-$ sudo apt-get install gconf-service gconf-service-backend gconf2 gconf2-common libgconf-2-4
-$ curl -J -L -o atom.deb https://atom.io/download/deb
-$ sudo dpkg -i atom.deb
-```
-
-## Node.js / Electron / npm
-```
-$ sudo apt-get install nodejs npm
 ```
 
 ## ssh / gpg
@@ -108,12 +56,13 @@ $ gpg --gen-key
 ## git / github
 ```
 $ sudo apt-add-repository ppa:git-core/ppa
-$ sudo apt-get update
 $ sudo apt-get install git
 ```
 
 ### config
 ```
+$ sudo apt-get install curl
+
 $ git config --global user.email "you@example.com"
 $ git config --global user.name "Your Name"
 
@@ -130,10 +79,6 @@ $ git config --global commit.gpgsign true
 $ read -p "username: " user; read -s -p "password: " pass; read -p "2FA code: " otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"armored_public_key":"'"$(gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')"'"}' https://api.github.com/user/gpg_keys
 ```
 
-## latex
-```
-$ sudo apt-get install texlive texstudio
-```
 ## vlc
 ```
 $ sudo apt-get install vlc
@@ -142,4 +87,41 @@ $ sudo apt-get install vlc
 ## brasero
 ```
 $ sudo apt-get install brasero
+```
+
+# Update
+
+## filebot
+```
+$ sudo apt-get install openjdk-8-jre openjfx
+$ sudo dpkg -i ~/filebot_4.7.9_amd64.deb
+```
+
+
+# Optional
+
+
+## docker
+```
+$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ apt-key fingerprint 0EBFCD88
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+$ sudo apt-get update && sudo apt-get install docker-ce
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+$ sudo systemctl enable docker
+$ sudo shutdown now -r
+```
+
+## Node.js / Electron / npm
+```
+$ sudo apt-get install nodejs npm
+```
+
+## atom
+```
+$ sudo apt-get install gconf-service gconf-service-backend gconf2 gconf2-common libgconf-2-4
+$ curl -J -L -o atom.deb https://atom.io/download/deb
+$ sudo dpkg -i atom.deb
 ```
