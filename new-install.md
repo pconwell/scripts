@@ -2,7 +2,10 @@
 
 ## initial
 
-`$ sudo apt-get update && sudo apt-get dist-upgrade -y`
+```
+$ sudo apt-get update && sudo apt-get dist-upgrade -y
+$ sudo apt-get install cifs-utils curl
+```
 
 ## chromium
 ```
@@ -61,8 +64,6 @@ $ sudo apt-get install git
 
 ### config
 ```
-$ sudo apt-get install curl
-
 $ git config --global user.email "you@example.com"
 $ git config --global user.name "Your Name"
 
