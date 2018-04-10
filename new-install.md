@@ -101,6 +101,16 @@ $ sudo dpkg -i ~/filebot_4.7.9_amd64.deb
 
 # Optional
 
+## pycharm
+
+> Download: https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=linux
+
+```
+tar -xzf ...tar...gz
+cd ...pycharm.../bin
+chmod +x pycharm.sh
+./pycharm.sh  
+```
 
 ## docker
 ```
