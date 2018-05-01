@@ -64,6 +64,10 @@ docker run -d --name=handbrake --restart=always -p 5880:5800 -p 5900:5900 -e AUT
 docker run -d --name plex --restart=always --network=host -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -e PLEX_CLAIM="CLAIM-NZPSFP7A3KL3X8D6WGSQ" -v ~/.plex/config:/config -v ~/.plex/transcode:/transcode -v /movies:/movies -v /shows:/shows plexinc/pms-docker:public
 ```
 
+#### tautulli
+```
+docker create --name=tautulli -v /home/pconwell/.plex/config:/config -v "/home/pconwell/.plex/config/Library/Application Support/Plex Media Server/Logs":/logs:ro -e PGID=1000 -e PUID=1000 -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 8181:8181 tautulli/tautulli
+```
 ### dokuwiki
 
 
