@@ -22,10 +22,9 @@ $ sudo apt-get install chromium-browser
 
 ## python
 ```
-$ sudo apt-get install python3 python3-pip
+$ sudo apt-get install python3-pip -y
 $ echo "# Python3 alias" >> .bashrc
 $ echo "alias python=python3" >> .bashrc
-$ echo "alias pip=pip3" >> .bashrc
 $ echo "alias pip=pip3" >> .bashrc
 ```
 
