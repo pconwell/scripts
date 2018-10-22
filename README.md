@@ -1,14 +1,11 @@
-# Random Scripts
+# Intro
 
-This repositiory is just random scripts to keep on hand for easy access. They will probably not be useful to anyone else except me.
+This repositiory is more of a 'cheat sheet' for myself, but others may potentially find it useful.
 
-Primarily, the purpose is to be able to document my installs so that I can easily recreate my setup if I need to reinstall.
+Primarily, the purpose is to be able to document my installs/docker containers so that I can easily recreate my setup if I need to reinstall.
 
+## To Do
 
-## Authors
-
-* **Patrick Conwell** - *Initial work*
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for detail
+- [ ] Update docker run to compose file(s)
+- [ ] Update Ubuntu 18.04 to Ubuntu 18.10
+- [ ] Update Server Install(s) instructions (this may be a while as the server will probably not be re-installed for a while)
