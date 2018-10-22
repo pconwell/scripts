@@ -33,69 +33,7 @@
 
 ### Docker VM
 
-```
-$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common 
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-$ sudo apt-key fingerprint 0EBFCD88
-$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-$ sudo apt-get update
-$ sudo apt-get install docker-ce 
-$ sudo docker run hello-world
-
-$ cat /proc/sys/fs/inotify/max_user_watches 
-$ sudo nano /etc/sysctl.conf 
-$ sudo sysctl -p /etc/sysctl.conf 
-$ cat /proc/sys/fs/inotify/max_user_watches 
-
-$ sudo docker run --restart=always -d --name=crashplan-pro -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 5800:5800 -v /docker/appdata/crashplan-pro:/config -v /backups:/backups -v /movies:/videos -v /shows:/shows -v /photos:/pictures -v /dropbox:/dropbox -v /shared:/shared jlesage/crashplan-pro
-
-$ sudo nano /etc/fstab 
-$ sudo mount -a
-
-$ sudo groupadd docker
-$ sudo usermod -aG docker pconwell
-$ exit
-$ groups
-$ docker run hello-world
-$ sudo shutdown now -r
-```
-#### Crashplan
-
-```
-sudo docker run --restart=always -d --name=crashplan-pro -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 5800:5800 -v /docker/appdata/crashplan-pro:/config -v /backups:/backups -v /movies:/videos -v /shows:/shows -v /photos:/pictures -v /dropbox:/dropbox -v /shared:/shared jlesage/crashplan-pro
-```
-#### Plex
-> You will need to replace the claim code with your own claim code. https://www.plex.tv/claim/
-
-```
-docker run -d --name plex --network=host -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -e PLEX_CLAIM="CLAIM-..." -v ~/.plex/config:/config -v ~/.plex/transcode:/transcode -v /movies:/movies -v /shows:/shows plexinc/pms-docker:public
-```
-
-#### RStudio
-> To access outside network, set up port fowarding to port 8787
-
-```
-docker run -d -p 8787:8787 rocker/rstudio
-```
-
-#### Dokuwiki
-
-```
-docker run -d -p 8888:80 --name dokuwiki pconwell/dokuwiki
-```
-
-#### Dropbox
-> You will need to go into `$ docker logs dropbox` to set up and link your account.
-
-```
-docker run -d --restart=always --name=dropbox -v /dropbox/:/dbox/Dropbox -e DBOX_UID=1000 -e DBOX_GID=1000 janeczku/dropbox
-```
-
-#### Handbrake
-
-```
-docker run -d --rm --name=handbrake_movies -p 5880:5800 -p 5900:5900 -v /docker/appdata/handbrake_movies:/config:rw -v $HOME:/storage:ro -v /movies/to_convert:/watch:rw -v /movies/movies_rips:/output:rw jlesage/handbrake
-```
+> See https://github.com/pconwell/scripts/blob/master/docker.md for up-to-date instructions
 
 ### Files VM
 
