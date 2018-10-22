@@ -44,12 +44,13 @@ $ sudo dpkg -i ~/Downloads/rstudio-xenial-1.1.456-amd64.deb
 
 ## horizon client
 
-> Current Version: https://my.vmware.com/web/vmware/details?downloadGroup=CART18FQ4_LIN64_470&productId=578&rPId=20573
+> Check Current Version: https://my.vmware.com/web/vmware/details?productId=578&rPId=20573&downloadGroup=CART19FQ2_LIN64_480
 
 ```
-$ wget https://download3.vmware.com/software/view/viewclients/CART18FQ4/VMware-Horizon-Client-4.7.0-7395152.x64.bundle
-$ chmod +x VMware-Horizon-Client-4.7.0-7395152.x64.bundle 
-$ sudo ./VMware-Horizon-Client-4.7.0-7395152.x64.bundle
+$ wget https://download3.vmware.com/software/view/viewclients/CART19FQ2/VMware-Horizon-Client-4.8.0-8518891.x64.bundle
+$ mv ./VMware-Horizon-Client-4.8.0-8518891.x64.bundle ~/Downloads/
+$ chmod +x ~/Downloads/VMware-Horizon-Client-4.8.0-8518891.x64.bundle
+$ sudo ~/Downloads/VMware-Horizon-Client-4.8.0-8518891.x64.bundle
 ```
 
 ## ssh / gpg
