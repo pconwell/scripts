@@ -186,20 +186,5 @@ $ sudo chown pconwell:pconwell /dropbox/
 `$ sudo service smbd restart`
 
 ### Windows VM
-> Nothing special.
-
-------------
-------------
-------------
-
-## Laptop (Docker)
-
-### MakeMKV
-> This will need to be installed on the laptop because otherwise accessing the DVD drive on the server will be a hassle
-
-> Create two different docker images -- one for movies and one for shows. You don't HAVE to do this, but due to the low overhead of containers, no reason NOT to create two containers with separate settings already configured for movies and shows.
-
-`$ docker run -d --rm --name=makemkv_shows -p 5801:5800 -p 5901:5900 -v /docker/appdata/makemkv_shows:/config:rw -v $HOME:/storage:ro -v $HOME/MakeMKV/shows:/output:rw --device /dev/sr0 jlesage/makemkv:beta`
-
-`$ docker run -d --rm --name=makemkv_movies -p 5800:5800 -p 5900:5900 -v /docker/appdata/makemkv_movies:/config:rw -v $HOME:/storage:ro -v $HOME/MakeMKV/movies:/output:rw --device /dev/sr0 jlesage/makemkv:beta`
+> Nothing special
 
