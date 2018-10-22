@@ -55,8 +55,9 @@ $ sudo env TERM=dumb ~/Downloads/VMware-Horizon-Client-4.9.0-9507999.x64.bundle 
 ## ssh / gpg
 ### generate ssh key
 ```
-$ ssh-keygen -t rsa -b 4096 -C "your@email.tld"
+$ ssh-keygen -t rsa -b 4096 -C "patrick.conwell@gmail.com" -f ~/.ssh/id_rsa -q -N ""
 ```
+> replace `-N ""` with and actual password. A blank password is not super secure.
 
 ### generate gpg key
 ```
