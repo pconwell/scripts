@@ -39,7 +39,7 @@ $ sudo apt-get install texlive texlive-latex-extra texstudio
 
 ```
 $ sudo apt-get install r-base r-base-dev libjpeg62
-$ sudo dpkg -i ~/Downloads/rstudio-xenial-1.1.442-amd64.deb
+$ sudo dpkg -i ~/Downloads/rstudio-xenial-1.1.456-amd64.deb
 ```
 
 ## horizon client
