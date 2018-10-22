@@ -38,6 +38,7 @@ $ sudo apt-get install texlive texlive-latex-extra texstudio
 > Download RStudio: https://www.rstudio.com/products/rstudio/download/#download
 
 ```
+$ wget -P ~/Downloads/ https://download1.rstudio.org/rstudio-xenial-1.1.456-amd64.deb
 $ sudo apt-get install r-base r-base-dev libjpeg62
 $ sudo dpkg -i ~/Downloads/rstudio-xenial-1.1.456-amd64.deb
 ```
