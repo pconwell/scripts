@@ -2,8 +2,16 @@
 
 ## initial
 
+``` 
+$ touch ~/bin/update.sh
+$ echo -e '#!/bin/bash\n\nsudo apt-get update\nsudo apt-get upgrade -y\nsudo apt-get clean\nsudo apt-get autoclean\nsudo apt-get autoremove -y' > ~/bin/update.sh
+$ chmod +x ~/bin/update.sh
+
 ```
-$ sudo apt-get update && sudo apt-get dist-upgrade -y
+cycle login to make ~/bin pop into path
+
+```
+$ update.sh
 $ sudo apt-get install cifs-utils curl
 ```
 
