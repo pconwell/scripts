@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# waiting for docker to support 18.10
+
 # email for ssh/gpg/github
 read -p "your email address: " email;
 
@@ -88,7 +90,21 @@ read -p "github 2FA code: " otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" -
 read -p "2FA code: " otp; curl -u "$user:$pass" -H "X-GitHub-OTP: $otp" --data '{"armored_public_key":"'"$(gpg --armor --export `gpg --list-secret-keys --keyid-format LONG | head -3 | tail -1 | awk -F" " '{print $2}' | awk -F"/" '{print $2}'` | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')"'"}' https://api.github.com/user/gpg_keys
 
 
+# fstab
+echo 'Passphrase: ""
+
+echo '//192.168.1.25/backups                   /backups              cifs guest,uid=1000,iocharset=utf8 0 0' | sudo tee -a /etc/fstab
+echo '//192.168.1.25/shared                    /home/pconwell/shared cifs guest,uid=1000,iocharset=utf8 0 0' | sudo tee -a /etc/fstab
+echo '//192.168.1.25/photos                    /home/pconwell/photos cifs guest,uid=1000,iocharset=utf8 0 0' | sudo tee -a /etc/fstab
+echo '//192.168.1.25/movies                    /home/pconwell/movies cifs guest,uid=1000,iocharset=utf8 0 0' | sudo tee -a /etc/fstab
+echo '//192.168.1.25/shows                     /home/pconwell/shows  cifs guest,uid=1000,iocharset=utf8 0 0' | sudo tee -a /etc/fstab
+echo '//192.168.1.25/backups                   /backups              cifs guest,uid=1000,iocharset=utf8 0 0' | sudo tee -a /etc/fstab
+
+
+
 #sudo shutdown now -r
+
+
 
 
 
