@@ -23,26 +23,17 @@ chmod +x ~/bin/update.sh
 ~/bin/update.sh
 
 # Install a bunch of stuff from repos
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common cifs-utils libgtk2.0-0 # core utils
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common cifs-utils libgtk2.0-0 -y# core utils
 
 ## git
-sudo apt-add-repository ppa:git-core/ppa
+sudo apt-add-repository ppa:git-core/ppa -y
 
 ## docker
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 apt-key fingerprint 0EBFCD88
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-sudo apt-get install \ # core utils
-chromium-browser \ #chrome
-python3-pip \ #python pip
-texlive texlive-latex-extra texstudio \ #latex
-r-base r-base-dev libjpeg62 \ # r
-git \ # git
-vlc \ # vlc
-brasero \ # brasero
-docker-ce \ # docker
--y
+sudo apt-get install chromium-browser python3-pip texlive texlive-latex-extra texstudio r-base r-base-dev libjpeg62 git vlc brasero docker-ce -y
 
 # config docker
 sudo groupadd docker
