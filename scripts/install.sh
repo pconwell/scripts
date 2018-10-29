@@ -23,7 +23,7 @@ chmod +x ~/bin/update.sh
 ~/bin/update.sh
 
 # Install a bunch of stuff from repos
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common cifs-utils libgtk2.0-0 -y# core utils
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common cifs-utils libgtk2.0-0 libjpeg62 -y # core utils
 
 ## git
 sudo apt-add-repository ppa:git-core/ppa -y
