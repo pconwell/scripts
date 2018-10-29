@@ -1,6 +1,15 @@
-# Ubuntu 18.04 b2 (minimal)
+# Ubuntu 18.10 (minimal)
 
 ## initial
+
+$ sudo apt install curl
+$ curl https://raw.githubusercontent.com/pconwell/scripts/master/scripts/install.sh > install.sh
+$ chmod +x install.sh
+$ ./install.sh
+
+
+
+> old below
 
 ``` 
 $ touch ~/bin/update.sh
