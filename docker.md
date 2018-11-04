@@ -49,7 +49,8 @@ docker run -d --name=crashplan --restart=always -e TZ="${TZ:-$(cat /etc/timezone
 
 
 ```
-docker run -d --name=rstudio_test --restart=always -p 8781:8787 -e USER=<user> -e PASSWORD=<password> pconwell/rstudio
+docker build --tag rstudio https://github.com/pconwell/rstudio.git#master
+docker run -d --name=rstudio --restart=always -p 8781:8787 -e USER=<user> -e PASSWORD=<password> rstudio
 ```
 
 ### handbrake
