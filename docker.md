@@ -50,8 +50,13 @@ docker run -d --name=crashplan --restart=always -e TZ="${TZ:-$(cat /etc/timezone
 
 ```
 docker build --tag rstudio https://github.com/pconwell/rstudio.git#master
-docker run -d --name=rstudio --restart=always -p 8781:8787 -e USER=<user> -e PASSWORD=<password> rstudio
+docker run -d --name=rstudio --restart=always -p 8781:8787 -e USER=<username> -e PASSWORD=<password> -v ~/.rstudio:/home rstudio
 ```
+
+> 1. Log in to rstudio, then Tools -> Global Options -> Git/SVN -> create RSA key
+> 2. View Public Key
+> 3. Copy Public Key to githbub
+
 
 ### handbrake
 
