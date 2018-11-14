@@ -12,3 +12,4 @@ Primarily, the purpose is to be able to document my installs/docker containers s
 - [ ] Update Ubuntu 18.04 to Ubuntu 18.10
   - [ ] Add fstab settings
 - [ ] Update Server Install(s) instructions (this may be a while as the server will probably not be re-installed for a while)
+- [ ] Add libiodbc2-dev to requirements
