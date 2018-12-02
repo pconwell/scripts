@@ -80,7 +80,7 @@ docker run -d --name=tautulli --restart=always -v /home/pconwell/.plex/config:/c
 
 
 ```
-docker run -d --name=dokuwiki --restart=always -p 8888:80 --name dokuwiki pconwell/dokuwiki
+docker run -d --name=dokuwiki --restart=always -p 8888:80 -v /home/pconwell/.dokuwiki:/bitnami bitnami/dokuwiki:latest
 ```
 
 ### dropbox
