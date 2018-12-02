@@ -74,7 +74,7 @@ docker run -d --name plex --restart=always --network=host -e TZ="${TZ:-$(cat /et
 
 #### tautulli
 ```
-docker create --name=tautulli -v /home/pconwell/.plex/config:/config -v "/home/pconwell/.plex/config/Library/Application Support/Plex Media Server/Logs":/logs:ro -e PGID=1000 -e PUID=1000 -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 8181:8181 tautulli/tautulli
+docker run -d --name=tautulli --restart=always -v /home/pconwell/.plex/config:/config -v "/home/pconwell/.plex/config/Library/Application Support/Plex Media Server/Logs":/logs:ro -e PGID=1000 -e PUID=1000 -e TZ="${TZ:-$(cat /etc/timezone 2>/dev/null)}" -p 8181:8181 tautulli/tautulli
 ```
 ### dokuwiki
 
