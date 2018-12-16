@@ -10,7 +10,7 @@ services:
         ports:
             - '8888:80'
         volumes:
-            - '/home/pconwell/.dokuwiki:/bitnami'
+            - '~/.dokuwiki:/bitnami'
         image: 'bitnami/dokuwiki:latest'
 
 ###################################################################
@@ -33,8 +33,8 @@ services:
         container_name: tautulli
         restart: always
         volumes:
-            - '/home/pconwell/.plex/config:/config'
-            - '/home/pconwell/.plex/config/Library/Application Support/Plex Media Server/Logs:/logs:ro'
+            - '~/.plex/config:/config'
+            - '~/.plex/config/Library/Application Support/Plex Media Server/Logs:/logs:ro'
         environment:
             - PGID=1000
             - PUID=1000
@@ -100,10 +100,10 @@ services:
             - '5900:5900'
         environment:
             - 'AUTOMATED_CONVERSION_PRESET=H.265 MKV 720p30'
-            - AUTOMATED_CONVERSION_FORMAT=mkv
+            - 'AUTOMATED_CONVERSION_FORMAT=mkv'
         volumes:
             - '~/.handbrake/config:/config:rw'
-            - '$HOME:/storage:ro'
+            - '~/.handbrake/storage:/storage:ro'
             - '/movies:/movies'
             - '/shows:/shows'
             - '/movies/to_convert:/watch:rw'
@@ -114,10 +114,11 @@ services:
     home-assistant:
         container_name: hass
         restart: always
+        environment:
+           - 'TZ=${TZ:-$(cat /etc/timezone 2>/dev/null)}'
         network_mode: host
         volumes:
-            - '/home/pconwell/.hass:/config'
-            - '/etc/localtime:/etc/localtime:ro'
+            - '~/.hass:/config'
         image: homeassistant/home-assistant
 
 ###################################################################
