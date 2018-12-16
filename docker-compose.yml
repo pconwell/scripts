@@ -1,0 +1,135 @@
+# host:vm
+
+version: '3'
+services:
+
+###################################################################
+    dokuwiki:
+        container_name: dokuwiki
+        restart: always
+        ports:
+            - '8888:80'
+        volumes:
+            - '/home/pconwell/.dokuwiki:/bitnami'
+        image: 'bitnami/dokuwiki:latest'
+
+###################################################################
+    pms-docker:
+        container_name: plex
+        restart: always
+        environment:
+            - 'TZ=${TZ:-$(cat /etc/timezone 2>/dev/null)}'
+            - PLEX_CLAIM=CLAIM-NZPSFP7A3KL3X8D6WGSQ
+        network_mode: host
+        volumes:
+            - '~/.plex/config:/config'
+            - '~/.plex/transcode:/transcode'
+            - '/movies:/movies'
+            - '/shows:/shows'
+        image: 'plexinc/pms-docker:plexpass'
+
+###################################################################
+    tautulli:
+        container_name: tautulli
+        restart: always
+        volumes:
+            - '/home/pconwell/.plex/config:/config'
+            - '/home/pconwell/.plex/config/Library/Application Support/Plex Media Server/Logs:/logs:ro'
+        environment:
+            - PGID=1000
+            - PUID=1000
+            - 'TZ=${TZ:-$(cat /etc/timezone 2>/dev/null)}'
+        ports:
+            - '8181:8181'
+        image: tautulli/tautulli
+
+###################################################################
+    crashplan-pro:
+        container_name: crashplan
+        restart: always
+        environment:
+            - 'TZ=${TZ:-$(cat /etc/timezone 2>/dev/null)}'
+        ports:
+            - '5800:5800'
+        volumes:
+            - '~/.crashplan/config:/config'
+            - '/backups:/backups'
+            - '/movies:/videos'
+            - '/shows:/shows'
+            - '/photos:/pictures'
+            - '/dropbox:/dropbox'
+            - '/shared:/shared'
+        image: jlesage/crashplan-pro
+
+###################################################################
+    unifi:
+        container_name: unifi
+        restart: always
+        volumes:
+            - '~/.unifi/:/config/'
+        environment:
+            - PGID=1000
+            - PUID=1000
+        ports:
+            - '3478:3478/udp'
+            - '10001:10001/udp'
+            - '8080:8080'
+            - '8081:8081'
+            - '8443:8443'
+            - '8843:8843'
+            - '8880:8880'
+        image: linuxserver/unifi
+
+###################################################################
+    portainer:
+        container_name: portainer
+        restart: always
+        ports:
+            - '9000:9000'
+        volumes:
+            - '/var/run/docker.sock:/var/run/docker.sock'
+            - '/opt/portainer:/data'
+        image: portainer/portainer
+
+###################################################################
+    handbrake:
+        container_name: handbrake
+        restart: always
+        ports:
+            - '5880:5800'
+            - '5900:5900'
+        environment:
+            - 'AUTOMATED_CONVERSION_PRESET=H.265 MKV 720p30'
+            - AUTOMATED_CONVERSION_FORMAT=mkv
+        volumes:
+            - '~/.handbrake/config:/config:rw'
+            - '$HOME:/storage:ro'
+            - '/movies:/movies'
+            - '/shows:/shows'
+            - '/movies/to_convert:/watch:rw'
+            - '/movies/movies_rips:/output:rw'
+        image: jlesage/handbrake
+
+###################################################################
+    home-assistant:
+        container_name: hass
+        restart: always
+        network_mode: host
+        volumes:
+            - '/home/pconwell/.hass:/config'
+            - '/etc/localtime:/etc/localtime:ro'
+        image: homeassistant/home-assistant
+
+###################################################################
+    rstudio:
+        build: https://github.com/pconwell/rstudio.git#master
+        container_name: rstudio
+        restart: always
+        ports:
+            - '8781:8787'
+        environment:
+            - USER=user
+            - PASSWORD=password
+        volumes:
+            - '~/.rstudio:/home'
+        image: rstudio
