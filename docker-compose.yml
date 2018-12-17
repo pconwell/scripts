@@ -23,10 +23,10 @@ services:
             - PLEX_CLAIM=CLAIM-NZPSFP7A3KL3X8D6WGSQ
         volumes:
             - '~/.plex/config:/config'
-            - '~/.plex/transcode:/transcode'
+            #- '~/.plex/transcode:/transcode'
             - '/movies:/movies'
             - '/shows:/shows'
-        #tmpfs: /transcode #testing
+        tmpfs: /transcode #testing
         image: 'plexinc/pms-docker:plexpass'
 
 ###################################################################
@@ -153,5 +153,5 @@ services:
             ServerIP: 192.168.1.24
         volumes:
             - '~/.pihole/:/etc/pihole/'
-            #- '~/.pihole/dnsmasq.d/:/etc/dnsmasq.d/"
+            - '~/.pihole/dnsmasq.d/:/etc/dnsmasq.d/"
         image: pihole/pihole:latest
