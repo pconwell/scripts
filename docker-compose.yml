@@ -150,7 +150,9 @@ services:
             - '80:80/tcp'
             - '443:443/tcp'
         environment:
-            ServerIP: 192.168.1.24
+            - 'ServerIP: 192.168.1.24'
+            - 'WEBPASSWORD=<pass>'
+            - 'TZ=${TZ:-$(cat /etc/timezone 2>/dev/null)}'
         volumes:
             - '~/.pihole/:/etc/pihole/'
             - '~/.pihole/dnsmasq.d/:/etc/dnsmasq.d/"
