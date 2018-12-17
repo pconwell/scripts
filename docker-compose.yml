@@ -26,6 +26,7 @@ services:
             - '~/.plex/transcode:/transcode'
             - '/movies:/movies'
             - '/shows:/shows'
+        #tmpfs: /transcode #testing
         image: 'plexinc/pms-docker:plexpass'
 
 ###################################################################
