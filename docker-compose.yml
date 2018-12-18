@@ -1,6 +1,6 @@
 # host:vm
 
-version: '3'
+version: '3.6'
 services:
 
 ###################################################################
@@ -23,10 +23,10 @@ services:
             - PLEX_CLAIM=CLAIM-NZPSFP7A3KL3X8D6WGSQ
         volumes:
             - '~/.plex/config:/config'
-            #- '~/.plex/transcode:/transcode'
             - '/movies:/movies'
             - '/shows:/shows'
-        tmpfs: /transcode #testing
+            - type: tmpfs
+              target: /transcode:rw
         image: 'plexinc/pms-docker:plexpass'
 
 ###################################################################
@@ -130,8 +130,8 @@ services:
         ports:
             - '8781:8787'
         environment:
-            - USER=user
-            - PASSWORD=password
+            - USER=<user>
+            - PASSWORD=<pass>
         volumes:
             - '~/.rstudio:/home'
         image: rstudio
@@ -150,10 +150,10 @@ services:
             - '80:80/tcp'
             - '443:443/tcp'
         environment:
-            - 'ServerIP: 192.168.1.24'
-            - 'WEBPASSWORD=<pass>'
-            - 'TZ=${TZ:-$(cat /etc/timezone 2>/dev/null)}'
+            - ServerIP=<host IP>
+            - WEBPASSWORD=<pass>
+            - TZ=${TZ:-$(cat /etc/timezone 2>/dev/null)}
         volumes:
             - '~/.pihole/:/etc/pihole/'
-            - '~/.pihole/dnsmasq.d/:/etc/dnsmasq.d/"
+            - '~/.pihole/dnsmasq.d/:/etc/dnsmasq.d/'
         image: pihole/pihole:latest
