@@ -8,7 +8,7 @@ nano /etc/ssh/sshd_config
 systemctl restart sshd
 
 # open up some ports we will need later
-# primarily for plex and pihole
+# primarily for plex, pihole and graylog
 iptables --list
 iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
 iptables -A INPUT -p tcp --dport 32400 -j ACCEPT
@@ -36,6 +36,11 @@ iptables -A INPUT -p tcp --dport 4717 -j ACCEPT
 iptables -A INPUT -p tcp --dport 4718 -j ACCEPT
 iptables -A INPUT -p tcp --dport 4719 -j ACCEPT
 iptables -A INPUT -p tcp --dport 4720 -j ACCEPT
+iptables -A INPUT -p udp --dport 5555 -j ACCEPT
+iptables -A INPUT -p tcp --dport 12201 -j ACCEPT
+iptables -A INPUT -p udp --dport 12201 -j ACCEPT
+iptables -A INPUT -p tcp --dport 1514 -j ACCEPT
+iptables -A INPUT -p tcp --dport 9001 -j ACCEPT
 iptables-save
 iptables-save > /etc/systemd/scripts/ip4save
 # test if iptables saved correctly
