@@ -41,6 +41,7 @@ iptables -A INPUT -p tcp --dport 12201 -j ACCEPT
 iptables -A INPUT -p udp --dport 12201 -j ACCEPT
 iptables -A INPUT -p tcp --dport 1514 -j ACCEPT
 iptables -A INPUT -p tcp --dport 9001 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8123 -j ACCEPT
 iptables-save
 iptables-save > /etc/systemd/scripts/ip4save
 # test if iptables saved correctly
