@@ -29,6 +29,8 @@ https://metis.fi/en/2018/02/unifi-on-gcp/
 > but doesn't revert back to primary only once primary is back online)
 > *in* controller (internal):
 
-`$ sudo su`
-`# crontab -e`
-`0 3 * * * /sbin/reboot`
+```
+$ sudo su
+# crontab -e
+0 3 * * * /sbin/reboot
+```
