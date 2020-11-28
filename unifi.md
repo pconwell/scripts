@@ -27,7 +27,7 @@ https://metis.fi/en/2018/02/unifi-on-gcp/
 > (test to see if it resets dns if primary dns fails)
 > (currently, if primary dns fails, it falls back to secondary,
 > but doesn't revert back to primary only once primary is back online)
-> *in* controller (internal):
+> ssh into USG:
 
 ```
 $ sudo su
