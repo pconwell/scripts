@@ -19,8 +19,7 @@ https://metis.fi/en/2018/02/unifi-on-gcp/
     5. Management, disks, networking, SSH keys -> advanced ->
         | KEY | VALUE | NOTES |
         | --- | ----- | ----- |
-        | startup-script-url | https://gist.githubusercontent.com/pconwell/ab3cf6b792bb60d665dc2de58edb74e5/raw/993c0690bc988c710a14b8e613cd802f40a5ac87/gs-startup.sh
- | Required! |        
+        | startup-script-url | https://gist.githubusercontent.com/pconwell/ab3cf6b792bb60d665dc2de58edb74e5/raw/993c0690bc988c710a14b8e613cd802f40a5ac87/gs-startup.sh | Required! |        
         | ddns-url | http://your.dyn.dns/update.php?key=xxxxx | Helps you access the Controller (not used) |
         | timezone | America/Chicago | set the correct timezone | 
         | dns-name | your.url.org | Required for HTTPS certificate | 
