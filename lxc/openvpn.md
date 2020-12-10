@@ -132,3 +132,29 @@ chmod +x ~/client-configs/make_config.sh
 https://www.reddit.com/r/Proxmox/comments/cx36p8/proxmox_606_lxc_and_openvpn/
 
 https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-debian-10
+
+
+
+## Generate client certificate
+```
+cd EasyRSA-v3.0.6/
+
+./easyrsa gen-req NAME nopass
+./easyrsa sign-req client NAME
+
+cp .pki/issued/NAME.crt ../client-configs/keys/
+cp ./pki/private/NAME.key ../client-configs/keys/
+
+cd ../client-configs/
+
+./make_config.sh NAME
+
+mount nfs 192.168.1.23:/mnt/user/shared/ /mnt/unraid/shared/
+
+cp ./file/NAME.ovpn /mnt/unraid/shared
+```
+
+
+
+
+
