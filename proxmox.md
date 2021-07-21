@@ -49,3 +49,19 @@ nano /etc/default/apcupsd
 apcaccess status
 
 ```
+
+## source.list
+
+```
+deb http://ftp.us.debian.org/debian bullseye main contrib
+
+deb http://ftp.us.debian.org/debian bullseye-updates main contrib
+
+# security updates
+deb http://security.debian.org bullseye-security main contrib
+
+# not for production use
+deb http://download.proxmox.com/debian bullseye pve-no-subscription
+```
+
+
