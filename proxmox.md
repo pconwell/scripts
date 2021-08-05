@@ -23,7 +23,8 @@ nano /etc/apcupsd/apcupsd.conf
   NOLOGINDIR /etc
   ONBATTERYDELAY 6
   BATTERYLEVEL 50
-  TIMEOUT 300
+  MINUTES 8
+  TIMEOUT 0
   ANNOY 300
   ANNOYDELAY 60
   NOLOGON disable
