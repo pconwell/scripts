@@ -116,3 +116,97 @@ services:
         gelf-address: 'udp://192.168.1.91:12201'   
     image: containrrr/watchtower
 ```
+
+## Jackett
+```
+version: '2'
+services:
+
+  jackett:
+    container_name: jackett
+    hostname: jackett
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    ports:
+      - 9117:9117
+    dns:
+      - 9.9.9.9
+    volumes:
+      - config:/config
+      - /mnt/user/shows/:/shows
+      - /mnt/user/movies/:/movies
+      - /mnt/user/shared/downloads:/downloads
+    logging:
+      driver: gelf
+      options:
+        gelf-address: 'udp://192.168.1.101:12201'
+    image: linuxserver/jackett
+    
+volumes:
+  config:
+    driver: local
+```
+
+
+
+## Sonarr / Radarr
+```
+version: '2'
+services:
+
+  sonarr:
+    container_name: sonarr
+    hostname: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - UMASK_SET=022 #optional
+    ports:
+      - 8998:8989
+    dns:
+      - 192.168.1.103
+    volumes:
+      - sonarr_config:/config
+      - /mnt/user/shows/:/shows
+      - /mnt/user/movies/:/movies
+      - /mnt/user/shared/downloads:/downloads
+    logging:
+      driver: gelf
+      options:
+        gelf-address: 'udp://192.168.1.101:12201'
+    image: linuxserver/sonarr
+    
+#  radarr:
+#    container_name: radarr
+#    hostname: radarr
+#    restart: unless-stopped
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=America/Chicago
+#    ports:
+#      - 7887:7878
+#    dns:
+#      - 192.168.1.103
+#    volumes:
+#      - radarr_config:/config
+#      - /mnt/user/shows/:/shows
+#      - /mnt/user/movies/:/movies
+#      - /mnt/user/shared/downloads:/downloads
+#    logging:
+#      driver: gelf
+#      options:
+#        gelf-address: 'udp://192.168.1.101:12201'
+#    image: linuxserver/radarr
+    
+volumes:
+  sonarr_config:
+    driver: local
+#  radarr_config:
+#    driver: local
+```
