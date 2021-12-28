@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 apt update && apt upgrade -y
-apt install curl ssh iptables wireguard qrencode
+apt install -y curl ssh iptables wireguard qrencode
 curl https://github.com/pconwell.keys >> /root/.ssh/authorized_keys
 
 mkdir -p /etc/wireguard/server
