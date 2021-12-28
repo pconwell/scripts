@@ -2,6 +2,8 @@
 
 apt update && apt upgrade -y
 apt-get install -y curl ssh iptables wireguard qrencode qemu-guest-agent
+mkdir -p /root/.ssh/
+touch /root/.ssh/authorized_keys
 curl https://github.com/pconwell.keys >> /root/.ssh/authorized_keys
 
 mkdir -p /etc/wireguard/server
@@ -49,5 +51,9 @@ echo "AllowedIPs = 0.0.0.0/0" >> /etc/wireguard/clients/trisha.conf
 wg set wg0 peer $(cat /etc/wireguard/clients/patrick.key.pub) allowed-ips 10.220.0.2
 wg set wg0 peer $(cat /etc/wireguard/clients/trisha.key.pub) allowed-ips 10.220.0.3
 
-qrencode -t ansiutf8 < /etc/wireguard/clients/patrick.conf
-qrencode -t ansiutf8 < /etc/wireguard/clients/trisha.conf
+shutdown now -r
+
+# qrencode -t ansiutf8 < /etc/wireguard/clients/patrick.conf
+# qrencode -t ansiutf8 < /etc/wireguard/clients/trisha.conf
+
+
