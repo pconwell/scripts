@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# curl -sSL https://raw.githubusercontent.com/pconwell/scripts/master/wireguard.sh | bash
 
 apt update && apt upgrade -y
 apt-get install -y curl ssh iptables wireguard qrencode qemu-guest-agent
