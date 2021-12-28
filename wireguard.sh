@@ -54,6 +54,13 @@ wg set wg0 peer $(cat /etc/wireguard/clients/trisha.key.pub) allowed-ips 10.220.
 
 shutdown now -r
 
+## After reboot:
+
+## Not sure why it's necessary to take wireguard down and back up - the reboot should take care of this:
+# wg-quick down wg0
+# wg-quick up wg0
+
+## Generate QR Codes for mobile devices:
 # qrencode -t ansiutf8 < /etc/wireguard/clients/patrick.conf
 # qrencode -t ansiutf8 < /etc/wireguard/clients/trisha.conf
 
