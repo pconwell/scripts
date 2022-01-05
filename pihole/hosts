@@ -21,38 +21,37 @@ ff02::3 ip6-allhosts
 # Custom host records are listed here.
 
 # sketchy tld
-ru
-cn
-ro
-ml
-ga
-gq
-cf
-tk
-pw
-ua
-ug
-ve
-info
-site
-club
-host
-party
-surf
-bid
-cfd
-biz
-work
-stream
-download
-xin
-gdn
-racing
-jetzt
-win
-vip
-ren
-kim
+0.0.0.0 ru
+0.0.0.0 cn
+0.0.0.0 ro
+0.0.0.0 ml
+0.0.0.0 ga
+0.0.0.0 gq
+0.0.0.0 cf
+0.0.0.0 tk
+0.0.0.0 pw
+0.0.0.0 ua
+0.0.0.0 ug
+0.0.0.0 ve
+0.0.0.0 info
+0.0.0.0 site
+0.0.0.0 club
+0.0.0.0 party
+0.0.0.0 surf
+0.0.0.0 bid
+0.0.0.0 cfd
+0.0.0.0 biz
+0.0.0.0 work
+0.0.0.0 stream
+0.0.0.0 download
+0.0.0.0 xin
+0.0.0.0 gdn
+0.0.0.0 racing
+0.0.0.0 jetzt
+0.0.0.0 win
+0.0.0.0 vip
+0.0.0.0 ren
+0.0.0.0 kim
 
 # Xiaomi
 0.0.0.0 api.ad.xiaomi.com
