@@ -20,6 +20,40 @@ ff02::3 ip6-allhosts
 
 # Custom host records are listed here.
 
+# sketchy tld
+ru
+cn
+ro
+ml
+ga
+gq
+cf
+tk
+pw
+ua
+ug
+ve
+info
+site
+club
+host
+party
+surf
+bid
+cfd
+biz
+work
+stream
+download
+xin
+gdn
+racing
+jetzt
+win
+vip
+ren
+kim
+
 # Xiaomi
 0.0.0.0 api.ad.xiaomi.com
 0.0.0.0 app.chat.xiaomi.net
