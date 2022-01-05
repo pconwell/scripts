@@ -53,6 +53,16 @@ ff02::3 ip6-allhosts
 0.0.0.0 ren
 0.0.0.0 kim
 
+# Roku
+0.0.0.0 ads.roku.com
+0.0.0.0 captive.roku.com
+0.0.0.0 cloudservices.roku.com
+0.0.0.0 logs.roku.com
+0.0.0.0 cti.roku.com
+0.0.0.0 sr.roku.com
+0.0.0.0 wwwimg.roku.com
+0.0.0.0 ravm.tv
+
 # Xiaomi
 0.0.0.0 api.ad.xiaomi.com
 0.0.0.0 app.chat.xiaomi.net
@@ -70,16 +80,6 @@ ff02::3 ip6-allhosts
 0.0.0.0 tracking.intl.miui.com
 0.0.0.0 tracking.india.miui.com
 0.0.0.0 tracking.rus.miui.com
-
-# Roku
-0.0.0.0 ads.roku.com
-0.0.0.0 captive.roku.com
-0.0.0.0 cloudservices.roku.com
-0.0.0.0 logs.roku.com
-0.0.0.0 cti.roku.com
-0.0.0.0 sr.roku.com
-0.0.0.0 wwwimg.roku.com
-0.0.0.0 ravm.tv
 
 # Huawei
 0.0.0.0 metrics.data.hicloud.com
