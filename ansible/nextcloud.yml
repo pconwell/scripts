@@ -1,0 +1,101 @@
+
+---
+- hosts: [some_host]
+  name: install nextcloud
+
+  tasks:
+  - name: apt update
+    ansible.builtin.apt:
+      update_cache: yes
+      force_apt_get: yes
+      cache_valid_time: 3600
+
+  - name: apt upgrade
+    ansible.builtin.apt:
+      upgrade: dist
+
+  - name: remove old packages
+    ansible.builtin.apt:
+      autoremove: yes
+
+  - name: Install packages
+    ansible.builtin.apt:
+      name:
+        - pip
+        - apache2
+        - bzip2
+        - mariadb-server
+        - mariadb-client
+        - libapache2-mod-php
+        - php-gd
+        - php-json
+        - php-mysql
+        - php-curl
+        - php-mbstring
+        - php-intl
+        - php-imagick
+        - php-xml
+        - php-zip
+        - php-sqlite3
+
+  - name: install pymsql
+    ansible.builtin.pip:
+      name: pymysql
+      state: present
+
+  - name: enable rewrite module
+    ansible.builtin.apache2_module:
+      name: rewrite
+      state: present
+      ignore_configcheck: True
+
+  - name: enable headers module
+    ansible.builtin.apache2_module:
+      name: headers
+      state: present
+      ignore_configcheck: True
+
+  - name: download nextcloud
+    ansible.builtin.get_url:
+      url: https://download.nextcloud.com/server/releases/latest.tar.bz2
+      dest: /tmp/
+      mode: '0755'
+
+  - name: untar nextcloud
+    ansible.builtin.unarchive:
+      src: /tmp/latest.tar.bz2
+      remote_src: yes
+      dest: /var/www/html/
+
+  - name: Create /var/www/html/nextcloud/data directory
+    ansible.builtin.file:
+      path: /var/www/html/nextcloud/data
+      state: directory
+      mode: '0755'
+
+  - name: change ownership of /var/www/html/nextcloud/
+    ansible.builtin.file:
+      path: /var/www/html/nextcloud
+      state: directory
+      recurse: yes
+      owner: www-data
+      group: www-data
+
+  - name: Restart apache
+    ansible.builtin.service:
+      name: apache2
+      state: restarted
+
+  - name: create a new database
+    community.mysql.mysql_db:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: nextclouddb
+      state: present
+
+  - name: Create nextcloud database user
+    community.mysql.mysql_user:
+      login_unix_socket: /var/run/mysqld/mysqld.sock
+      name: nextclouduser
+      password: some-password
+      priv: 'nextclouddb.*:ALL'
+      state: present
