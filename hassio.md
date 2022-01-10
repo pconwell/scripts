@@ -17,5 +17,6 @@
 5. On proxmox host: `qm importdisk [VM ID] /root/haos_ova-[VERSION].qcow2 local-lvm --format qcow2`
 8. home-assistant -> hardware -> unused disk 0 -> double click -> add
 9. home-assistant -> options -> boot order -> move scsi0 to top and enable checkbox (uncheck other two, if you want)
-10. start VM
-11. wait for boot (2-3 minutes), then find IP address and navigate to http://IP:8123
+10. home-assistant -> QEMU Guest Agent -> yes
+11. start VM
+12. wait for boot (2-3 minutes), then find IP address and navigate to http://IP:8123
