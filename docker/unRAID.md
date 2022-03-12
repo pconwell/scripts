@@ -1,3 +1,11 @@
+## Portainer
+> in unRAID terminal
+
+```
+# docker volume create portainer_data
+# docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+```
+
 ## Crashplan
 
 ```
@@ -11,10 +19,9 @@ services:
     environment:
       - TZ=America/Chicago
     dns:
-      - 9.9.9.9
+      - 8.8.8.8
     volumes:
-      - config:/config
-      - storage:/storage
+      - /mnt/user/appdata/crashplan/config:/config
       - /mnt/user/appdata:/mnt/appdata:ro
       - /mnt/user/backups:/mnt/backups:ro
       - /mnt/user/domains:/mnt/domains:ro
@@ -33,12 +40,6 @@ services:
       options:
         gelf-address: 'udp://192.168.1.91:12201'      
     image: jlesage/crashplan-pro
-
-volumes:
-  config:
-    driver: local
-  storage:
-    driver: local
 ```
 
 ## Transmission
@@ -58,16 +59,16 @@ services:
       - OPENVPN_USERNAME=email@email.com
       - OPENVPN_PASSWORD=password
       - WEBPROXY_ENABLED=false
-      - LOCAL_NETWORK=192.168.1.0/24
+      - LOCAL_NETWORK=192.168.0.0/16
       - TRANSMISSION_DOWNLOAD_DIR="/mnt/shared/downloads/complete"
       - TRANSMISSION_INCOMPLETE_DIR="/mnt/shared/downloads/incomplete"
       - TRANSMISSION_INCOMPLETE_DIR_ENABLED="true"
       - TZ=America/Chicago
     dns:
-      - 9.9.9.9
+      - 8.8.8.8
     volumes:
-      - data:/data
-      - config:/config
+      - /mnt/user/appdata/transmission/data:/data
+      - /mnt/user/appdata/transmission/config:/config
       - /mnt/user/shared/:/mnt/shared/
       - /mnt/user/movies/:/mnt/movies/
       - /mnt/user/shows/:/mnt/shows/
@@ -83,13 +84,6 @@ services:
       options:
         gelf-address: 'udp://192.168.1.91:12201'    
     image: haugene/transmission-openvpn
-
-
-volumes:
-  data:
-    driver: local
-  config:
-    driver: local    
 ```
 
 ## Watchtower
@@ -109,7 +103,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     dns:
-      - 9.9.9.9
+      - 8.8.8.8
     logging:
       driver: gelf
       options:
@@ -135,7 +129,7 @@ services:
     dns:
       - 9.9.9.9
     volumes:
-      - config:/config
+      - /mnt/user/appdata/jacket/config:/config
       - /mnt/user/shows/:/shows
       - /mnt/user/movies/:/movies
       - /mnt/user/shared/downloads:/downloads
@@ -144,10 +138,6 @@ services:
       options:
         gelf-address: 'udp://192.168.10.101:12201'
     image: linuxserver/jackett
-    
-volumes:
-  config:
-    driver: local
 ```
 
 
@@ -209,4 +199,35 @@ volumes:
     driver: local
 #  radarr_config:
 #    driver: local
+```
+
+
+## Sonarr
+
+```
+version: '2'
+services:
+
+  sonarr:
+    container_name: sonarr
+    hostname: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - UMASK_SET=022 #optional
+    ports:
+      - 8998:8989
+    dns:
+      - 8.8.8.8
+    volumes:
+      - /mnt/user/appdata/sonarr/config:/config
+      - /mnt/user/shows/:/shows
+      - /mnt/user/shared/downloads:/downloads
+    logging:
+      driver: gelf
+      options:
+        gelf-address: 'udp://192.168.1.101:12201'
+    image: linuxserver/sonarr
 ```
