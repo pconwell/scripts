@@ -53,9 +53,9 @@ services:
     restart: unless-stopped
     environment:
       - CREATE_TUN_DEVICE=true
-      - OPENVPN_PROVIDER=[provider]
-      - OPENVPN_CONFIG=[leaveblank_deletethis]
-      - OPENVPN_USERNAME=user@email.com
+      - OPENVPN_PROVIDER=NORDVPN
+      - OPENVPN_CONFIG=
+      - OPENVPN_USERNAME=email@email.com
       - OPENVPN_PASSWORD=password
       - WEBPROXY_ENABLED=false
       - LOCAL_NETWORK=192.168.1.0/24
@@ -89,7 +89,7 @@ volumes:
   data:
     driver: local
   config:
-    driver: local  
+    driver: local    
 ```
 
 ## Watchtower
@@ -104,7 +104,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=America/Chicago
-      - WATCHTOWER_SCHEDULE=0 0 4 * * *
+      - WATCHTOWER_SCHEDULE=0 0 2 * * *
       - WATCHTOWER_CLEANUP=true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -142,7 +142,7 @@ services:
     logging:
       driver: gelf
       options:
-        gelf-address: 'udp://192.168.1.101:12201'
+        gelf-address: 'udp://192.168.10.101:12201'
     image: linuxserver/jackett
     
 volumes:
