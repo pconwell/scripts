@@ -65,4 +65,26 @@ deb http://security.debian.org bullseye-security main contrib
 deb http://download.proxmox.com/debian bullseye pve-no-subscription
 ```
 
+## fix stale nfs (optional?):
 
+```
+#!/bin/bash
+
+# crontab:
+#* * * * * /root/fix_stale_nfs.sh >/dev/null 2>&1
+
+list=$(ls /mnt/unraid)
+
+for i in $list
+do
+        status=$(ls /mnt/unraid/$i 2>&1)
+
+        if [[ $status =~ .*Stale.* ]]
+                then
+                umount -f /mnt/unraid/$i
+                umount -l /mnt/unraid/$i
+        fi
+done
+
+mount -a
+```
