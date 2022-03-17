@@ -9,7 +9,7 @@
             "options":[
                "strict-order",
                "server=192.168.1.103",
-               "server=192.168.1.23"
+               "server=192.168.10.23"
             ]
          }
       },
