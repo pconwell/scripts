@@ -1,3 +1,5 @@
+## Google Cloud
+
 https://metis.fi/en/2018/02/unifi-on-gcp/
 
 1. create google compute cloud free (f1-micro)
@@ -75,4 +77,22 @@ create backup schedule
 $ sudo su
 # crontab -e
 0 3 * * * /sbin/reboot
+```
+
+## Debian 11 Proxmox
+
+```
+apt update && apt upgrade -y
+apt install -y gpg gnupg sudo
+wget -O- https://www.mongodb.org/static/pgp/server-4.0.asc | apt-key add -
+echo "" >> /etc/apt/sources.list
+echo "# backports for unifi installer" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian stretch main" >> /etc/apt/sources.list
+echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" >> /etc/apt/sources.list
+apt update
+apt install -y openjdk-8-jre-headless 
+wget https://fw-download.ubnt.com/data/unifi-controller/7fe4-debian-7.2.94-60da5d445e0f47779a6d635724185886.deb
+dpkg -i 7fe4-debian-7.2.94-60da5d445e0f47779a6d635724185886.deb
+apt install -f
+dpkg -i 7fe4-debian-7.2.94-60da5d445e0f47779a6d635724185886.deb
 ```
