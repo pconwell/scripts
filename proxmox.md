@@ -1,3 +1,8 @@
+## color terminal
+add to .bashrc
+`printf %b '\e]11;#ff0000\a'`
+
+
 ## nag buster
 
 ```
