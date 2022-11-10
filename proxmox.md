@@ -12,6 +12,32 @@ bash install.sh
 
 ## ups auto shutdown
 
+### nano /lib/systemd/system/apcupsd.service
+
+```
+[Unit]
+# network-online is really needed, otherwise there are problems with snmp
+# -> 865620
+After=network-online.target
+Description=UPS power management daemon
+Documentation=man:apcupsd(8)
+
+[Service]
+ExecStartPre=/lib/apcupsd/prestart
+ExecStart=/sbin/apcupsd
+Type=forking
+KillMode=process
+PIDFile=/var/run/apcupsd.pid
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
+
+### config
+
 ```
 apt install apcupsd 
   
