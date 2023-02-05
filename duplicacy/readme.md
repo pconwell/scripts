@@ -40,7 +40,7 @@ systemctl status duplicacy.service
 systemctl enable duplicacy.service
 
 apt install nfs-common
-mkdir /mnt/appdata
+mkdir /mnt/proxmox
 mkdir /mnt/backups
 mkdir /mnt/photos
 mkdir /mnt/shared
