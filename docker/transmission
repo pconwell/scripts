@@ -45,9 +45,8 @@ services:
       - 192.168.1.16
       - 192.168.1.17
     volumes:
-      - /mnt/user/torrent_downloads:/mnt/downloads
-      - /mnt/user/appdata/transmission/data:/data
-      - /mnt/user/appdata/transmission/config:/config
+      - /mnt/torrent_downloads:/mnt/downloads
+      - /mnt/appdata/transmission/config:/config
     ports:
       - 9091:9091
     cap_add:
