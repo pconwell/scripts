@@ -44,8 +44,8 @@ echo "PublicKey = $(cat /etc/wireguard/server/server.key.pub)" >> /etc/wireguard
 echo "Endpoint = $(curl ip.me):51820" >> /etc/wireguard/clients/trisha.conf
 echo "AllowedIPs = 0.0.0.0/0" >> /etc/wireguard/clients/trisha.conf
 
-wg set wg0 peer $(cat /etc/wireguard/clients/patrick.key.pub) allowed-ips 172.16.0.1/30
-wg set wg0 peer $(cat /etc/wireguard/clients/trisha.key.pub) allowed-ips 172.16.0.2/30
+wg set wg0 peer $(cat /etc/wireguard/clients/patrick.key.pub) allowed-ips 172.16.0.1
+wg set wg0 peer $(cat /etc/wireguard/clients/trisha.key.pub) allowed-ips 172.16.0.2
 
 qrencode -t ansiutf8 -r "/etc/wireguard/clients/patrick.conf"
 qrencode -t ansiutf8 -r "/etc/wireguard/clients/trisha.conf"
