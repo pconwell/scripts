@@ -65,3 +65,5 @@ shutdown now -r
 # wg-quick down wg0
 # wg-quick up wg0
 
+# qrencode -t ansiutf8 -r "/etc/wireguard/clients/patrick.conf"
+
