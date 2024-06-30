@@ -13,6 +13,7 @@ CONFIG_OPTIONS=(
   --ignore-when-wan-up
   --ignore-logoff
   --ping-gateway
+  ## comment out below line if USG Pro
   --set-mac
 )
 
