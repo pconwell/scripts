@@ -2,6 +2,8 @@
 # EdgeOS startup script for eap_proxy.py. See README.md.
 
 # Adjust IF_WAN and IF_ROUTER for your setup.
+# USG: IF_WAN=eth0; IF_ROUTER=eth2
+# USG Pro: IF_WAN=eth2; IF_ROUTER=eth3
 IF_WAN=eth0     # Interface connected to the AT&T ONT
 IF_ROUTER=eth2  # Interface connected to the AT&T Router Gateway (RG)
 
