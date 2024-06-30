@@ -4,8 +4,8 @@
 # Adjust IF_WAN and IF_ROUTER for your setup.
 # USG: IF_WAN=eth0; IF_ROUTER=eth2
 # USG Pro: IF_WAN=eth2; IF_ROUTER=eth3
-IF_WAN=eth0     # Interface connected to the AT&T ONT
-IF_ROUTER=eth2  # Interface connected to the AT&T Router Gateway (RG)
+IF_WAN=eth2     # Interface connected to the AT&T ONT
+IF_ROUTER=eth3  # Interface connected to the AT&T Router Gateway (RG)
 
 # CONFIG_OPTIONS don't normally need to be adjusted. See README.MD.
 CONFIG_OPTIONS=(
@@ -13,7 +13,6 @@ CONFIG_OPTIONS=(
   --ignore-when-wan-up
   --ignore-logoff
   --ping-gateway
-  ## comment out below line if USG Pro
   --set-mac
 )
 
