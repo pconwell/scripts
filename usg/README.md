@@ -120,17 +120,19 @@ save
 exit
 ```
 
-  1. Using SFTP/SCP/SSH/Whatver, copy `eap_proxy.py` and `eap_proxy.sh` to `/config/scripts/post-config.d/`
-      - > NOTE: Make sure to change eap_proxy.sh to match your eth ports!
-  2. SSH into USG
+  1. Copy `eap_proxy.py` and `eap_proxy.sh` to `/config/scripts/post-config.d/`
+      - `scp /path/to/eap_proxy.py 192.168.1.1:/config/scripts/post-config.d/`
+      - `scp /path/to/eap_proxy.sh 192.168.1.1:/config/scripts/post-config.d/`
+      - > NOTE: Make sure to change `eap_proxy.sh` to match your eth ports and comment out `set-mac`!
+  3. SSH into USG
       1. Move `eap_proxy.py` with `sudo mv /config/scripts/post-config.d/eap_proxy.py /config/scripts/`
       2. Start up the python listening script with `sudo python /config/scripts/eap_proxy.py --restart-dhcp --ignore-when-wan-up --ignore-logoff --ping-gateway`
-  3. Powercycle the ATT Gateway, wait 5+ minutes. Eventually, you should see something like `[2022-01-10 09:42:04,750]: eth0.0: 00:00:00:00:00:00 > 00:00:00:00:00:00, EAP packet (0) v1, len 4, Success (3) id 10, len 4 [0] > eth2`  
+  4. Powercycle the ATT Gateway, wait 5+ minutes. Eventually, you should see something like `[2022-01-10 09:42:04,750]: eth0.0: 00:00:00:00:00:00 > 00:00:00:00:00:00, EAP packet (0) v1, len 4, Success (3) id 10, len 4 [0] > eth2`  
   The important part you are looking for is `Success`.
-  4. Once you see `Success`, test your internet connection. You should be able to connect to the web. If not, retrace your steps.
-  5. `ctrl + c` to stop the python listening script.
-  6. Set the bash script to executable so it will run automatically: `chmod +x /config/scripts/post-config.d/eap_proxy.sh`
-  7. Reboot usg with `reboot now`.
+  5. Once you see `Success`, test your internet connection. You should be able to connect to the web. If not, retrace your steps.
+  6. `ctrl + c` to stop the python listening script.
+  7. Set the bash script to executable so it will run automatically: `chmod +x /config/scripts/post-config.d/eap_proxy.sh`
+  8. Reboot usg with `reboot now`.
 
 ## Conclusion
   
