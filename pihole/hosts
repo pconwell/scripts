@@ -218,4 +218,11 @@ ff02::3 ip6-allhosts
 0.0.0.0 extmaps-api.yandex.net
 0.0.0.0 adsdk.yandex.ru
 
+# others
+0.0.0.0 mouseflow.com
+0.0.0.0 luckyorange.com
+0.0.0.0 hotjar.com
+0.0.0.0 freshmarketer.com
+
+
 # End of custom host records.
