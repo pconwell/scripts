@@ -69,6 +69,7 @@ ff02::3 ip6-allhosts
 # amcrest
 0.0.0.0 p2p.amcrestview.com
 0.0.0.0 amcrestview.com
+0.0.0.0 amcrestcloud.com
 
 # Xiaomi
 0.0.0.0 api.ad.xiaomi.com
