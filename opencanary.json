@@ -1,0 +1,54 @@
+{
+    "device.node_id": "opencanary-1",
+    "ssh.enabled": true,
+    "ssh.port": 22,
+    "ssh.version": "SSH-2.0-OpenSSH_5.1p1 Debian-4",
+    "ftp.enabled": true,
+    "ftp.port": 21,
+    "ftp.banner": "FTP server ready",
+    "http.banner": "Apache/2.2.22 (Ubuntu)",
+    "http.enabled": true,
+    "http.port": 80,
+    "http.skin": "nasLogin",
+    "http.skin.list": [
+        {
+            "desc": "Plain HTML Login",
+            "name": "basicLogin"
+        },
+        {
+            "desc": "Synology NAS Login",
+            "name": "nasLogin"
+        }
+    ],
+    "logger": {
+        "class": "PyLogger",
+        "kwargs": {
+            "formatters": {
+                "plain": {
+                    "format": "%(message)s"
+                },
+                "syslog_rfc": {
+                    "format": "opencanary %(name)s %(levelname)-5s %(message)s"
+                }
+            },
+            "handlers": {
+                "graylog": {
+                    "class": "logging.handlers.SysLogHandler",
+                    "formatter": "syslog_rfc",
+                    "address": ["172.24.0.64", 1514],
+                    "socktype": "ext://socket.SOCK_DGRAM"
+                },
+                "SMTP": {
+                    "class": "logging.handlers.SMTPHandler",
+                    "mailhost": ["smtp.gmail.com", 587],
+                    "fromaddr": "from@gmail.com",
+                    "toaddrs": ["to@gmail.com"],
+                    "subject": "OpenCanary Alert",
+                    "credentials": ["from", "pass"],
+                    "secure": []
+                }
+                }
+            }
+        }
+    }
+}
