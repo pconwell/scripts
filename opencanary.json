@@ -47,7 +47,6 @@
                     "credentials": ["from", "pass"],
                     "secure": []
                 }
-                }
             }
         }
     }
