@@ -1,34 +1,46 @@
+## Plex
 
-## plex
+> NOTE: The server and local device used during install/config MUST be on the same subnet during installation.
 
-> create privilged container
-> enable nfs in options
+Create priviliged container (to mount NFS shares)
+Provision as appropriate (ajust as needed):
+- 16 cores
+- 16 GB RAM
+- 128 GB HD space
+
+Options -> Features -> NFS  
+Boot CT  
 
 ```
-ln -fs /usr/share/zoneinfo/America/Chicago /etc/localtime
-dpkg-reconfigure --frontend noninteractive tzdata
-
-echo deb https://downloads.plex.tv/repo/deb public main | tee /etc/apt/sources.list.d/plexmediaserver.list
-curl https://downloads.plex.tv/plex-keys/PlexSign.key | apt-key add -
-
 apt update && apt upgrade -y && apt autoremove -y
-apt install curl gnupg2 nfs-common beignet-opencl-icd ocl-icd-libopencl1 plexmediaserver
-
-mkdir /mnt/unraid
-mount -t nfs 192.168.1.243:/mnt/user/temp_share /mnt/unraid
+apt install -y curl gpg
+curl -fsSL https://downloads.plex.tv/plex-keys/PlexSign.key | gpg --dearmor -o /usr/share/keyrings/plex-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/plex-archive-keyring.gpg] https://downloads.plex.tv/repo/deb public main" | tee /etc/apt/sources.list.d/plexmediaserver.list
+apt update && apt install -y plexmediaserver nfs-common
+mkdir -p /mnt/unraid/MEDIA
 ```
+nano /etc/fstab  
+add: `NAS_IP:/mnt/user/MEDIA/    /mnt/unraid/MEDIA    nfs     ro,defaults,rsize=65536,timeo=14,intr    0    0`
 
-## tautulli
+mount -a
 
-```
-apt install python3-setuptools unzip
-cd /opt
-wget https://github.com/Tautulli/Tautulli/archive/master.zip
-unzip master.zip
-mv Tautulli-master/ Tautulli/
-cp /opt/Tautulli/init-scripts/init.systemd /lib/systemd/system/tautulli.service
-nano /lib/systemd/system/tautulli.service
-    Change User & group to root
-systemctl daemon-reload && systemctl enable tautulli.service
-systemctl start tautulli.service
-```
+http://IP_ADDRESS:32400/web
+
+## UFW (Ubunut Firewall) - Optional
+> If you want to restrict your server to certain TVs/Devices on your local network
+> (this assumes you do NOT want to allow remote access as well)
+
+nano /var/lib/plexmediaserver/Library/Application\ Support/Plex\ Media\ Server/Preferences.xml  
+add: `allowedNetworks="SUBNET/24"` (eg `<Preferences allowedNetworks="172.24.0.0/24" OldestPreviousVersion=...`  
+set: `AcceptedEULA` = 1
+
+> Note: You may be able to bypass the above manual config depending on the version of plex
+> You can try to go to the web url of the server then click "what's this?" at the bottom.
+
+apt install ufw
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow ssh
+ufw allow from [LOCAL_IP]
+ufw enable
+ufw status
