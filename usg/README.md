@@ -1,34 +1,40 @@
 # Unifi Security Gateway ATT fiber bypass  
-> based on https://medium.com/@mrtcve/at-t-gigabit-fiber-modem-bypass-using-unifi-usg-updated-c628f7f458cf  
-> and: https://medium.com/@david.sandor/for-anyone-doing-this-with-the-unifi-security-gateway-pro-4-there-are-some-subtle-changes-you-need-da72bbce894d  
+> based on [this post (USG)](https://medium.com/@mrtcve/at-t-gigabit-fiber-modem-bypass-using-unifi-usg-updated-c628f7f458cf) and [this post (USG-PRO-4)](https://medium.com/@david.sandor/for-anyone-doing-this-with-the-unifi-security-gateway-pro-4-there-are-some-subtle-changes-you-need-da72bbce894d)  
 > The original article includes IPv6, these instructions only include IPv4
 
-** Confirmed working as of July 2024 **
+> [!NOTE]
+> Confirmed working as of July 2024
 
-Once set up, this will completely bypass the ATT Gateway. Internet traffic will pass directly from the USG to the ATT ONT. The only thing the ATT Gateway will do is provide the authentication certificates necessary to sign in to the ATT network. In fact, once it authenticates, you can disconnect the ATT Gateway. However, this is not particularly recommended as the USG may need to reauthenticate at unknown times. Leaving it connected allows the USG to reauthenticate whenever necessary.
+Once set up, this will completely bypass the ATT Gateway. Internet traffic will pass directly from the USG|USG-PRO-4 to the ATT ONT. The only thing the ATT Gateway will do is provide the authentication certificates necessary to sign in to the ATT network. In fact, once it authenticates, you can disconnect the ATT Gateway. However, this is not particularly recommended as the USG may need to reauthenticate at unknown times. Leaving it connected allows the USG to reauthenticate whenever necessary.
+
 
 ## Equipment:
   * ATT Optical Network Terminal (the box the fiber line goes into)
   * ATT Broadband Gateway - (tested with pace 5268Aac)
-  * Unifi Security Gateway or Unifi Security Gateway Pro 4
-  * Unifi Controller - (This will work with a cloud hosted instance, but you will need to do the steps in a different order *and* you can run into issues if you need to change configurations while the bypass is being set up. For the initial setup, a local running version of the controller is highly recommended.)
-  
+  * Unifi Security Gateway (USG) or Unifi Security Gateway Pro 4 (USG-PRO-4)
+  * Unifi Controller - (This will work with a cloud hosted instance, but you will need to do the steps in a different order *and* you can run into issues if you need to change configurations while the bypass is being set up. For the initial setup, running a local version of the controller is highly recommended.)
+
+
 ## Prep
-1. Set up your USG / USG Pro so that it is adopted by the controller.
-2. (Optional) Using the ATT "DMZ" so the USG / USG Pro can connect to the internet, configure your network the way you want it and make sure everything works correctly.
-   - > NOTE: I would recommend configuring the BARE MINIMUM to test that the internet works, THEN do the bypass, THEN configure your network the way you want it.
-   - > ATT ONT --> ATT Gateway (DMZ) --> USG / USG Pro --> LAN
-2. Download the necessary files from this repo (eap_proxy.py and eap_tcpdump.sh) to your computer because the internet will stop working at certain steps.
-3. Connect your computer to the ATT gateway via one of the LAN ports on the ATT router.
+1. Set up your USG|USG-PRO-4 Pro so that it is adopted by the controller. Don't worry about individual settings/configurations yet, just get it adopted.
+2. (Optional - but recommended) Using the ATT "DMZ", set up the USG|USG-PRO-4 so that it connects to the internet and configure your network the way you want it and make sure everything works correctly before you set up the bypass.
+> [!TIP]
+> I would recommend configuring your network to the BARE MINIMUM necessary to test that the internet works. *Then* set up the bypass. Once the bypass is working, then configure your network the way you want it.
+3. Download the necessary files from this repo (eap_proxy.py and eap_tcpdump.sh) to your computer because the internet will stop working at certain steps.
+4. Connect your computer to the ATT gateway via one of the LAN ports on the ATT router.
   - Disable all possible services on the ATT gateway - particular the wifi radios.
   - Set the gateway LAN IP address to something like 192.168.254.254 or whatever won't conflict with your unifi LAN. This won't really matter as we aren't using the LAN on the gateway, but just to make life easier.
-4. Connect your computer back to the Unifi LAN (either directly to the USG LAN port, or through a swich connected to the USG LAN port).
+5. Connect your computer back to the Unifi LAN (either directly to the USG LAN port, or through a swich connected to the USG LAN port).
 
-## Wiring configuration
 
-### USG:
+## USG
+> [!CAUTION]
+> For the USG-PRO-4, scroll down.
 
-Depending on when your USG was manufactured, you will either see ports labeled [`WAN`,`LAN`,`VOIP`], or [`WAN 1`,`LAN 1`,`WAN 2 / LAN 2`]. The hardware (as far as I know) is idential in both, so regardless of how they are labeled, they are mapped as follows:
+#### Wiring Configuration
+
+> [!NOTE]
+> Depending on when your USG was manufactured, you will either see ports labeled [`WAN`,`LAN`,`VOIP`], or [`WAN 1`,`LAN 1`,`WAN 2 / LAN 2`]. The hardware (as far as I know) is idential in both, so regardless of how they are labeled, they are mapped as follows:
 
 | Port | Old Labels | New Labels    | Connect to...      |
 |:----:|------------|---------------|----------------------|
@@ -36,22 +42,12 @@ Depending on when your USG was manufactured, you will either see ports labeled [
 | eth1 | LAN        | LAN 1         | Your LAN             |
 | eth2 | VOIP       | WAN 2 / LAN 2 | ATT Gateway ONT Port |
 
-### USG Pro:
-
-| Port | Labels | Connect to...      |
-|:----:|--------|----------------------|
-| eth0 | LAN 1  | Your LAN             |
-| eth1 | LAN 2  |                      |
-| eth2 | WAN 1  | ATT ONT box          |
-| eth3 | WAN 2  | ATT Gateway ONT Port |
-
-  
-## Controller configuration
-
-### USG
+### Controller configuration
 
 After following the prep instructions above, remote (ssh) into the router and run the following series of commands to set the proper configurations:  
-> NOTE: I have not specifically tested the below config scripts, but they should work. If they don't - refer to an earlier history of this file for previous working instructions.
+
+> [!IMPORTANT]
+> Make sure to change `e0:22:04:xx:xx:xx` to whatever your ATT router's ONT MAC address is. It should be the MAC printed on the side of the router - very easy to find.
 
 ```
 configure
@@ -84,24 +80,40 @@ exit
   1. Copy `eap_proxy.py` and `eap_proxy.sh` to `/config/scripts/post-config.d/` by running `scp` from your computer:
       - `scp /path/to/eap_proxy.py username@192.168.1.1:/config/scripts/post-config.d/`
       - `scp /path/to/eap_proxy.sh username@192.168.1.1:/config/scripts/post-config.d/`
-      - > NOTE: Make sure to change `eap_proxy.sh` to match your eth ports depending on which model you have! And change `username` to whatever your unifi username is.
-  3. Remote (ssh) into USG:
+> [!IMPORTANT]
+> Change `eap_proxy.sh` to match your eth ports depending on which model you have!  
+> Change `username` to whatever your unifi host ssh username is.  
+> Change `192.168.1.1` to whatever your USG IP address is.  
+  2. Remote (ssh) into USG:
       1. Move `eap_proxy.py` with `sudo mv /config/scripts/post-config.d/eap_proxy.py /config/scripts/`
       2. Start up the python listening script with `sudo python /config/scripts/eap_proxy.py --restart-dhcp --ignore-when-wan-up --ignore-logoff --ping-gateway --set-mac eth0 eth2`
-  4. Powercycle the ATT Gateway, wait 5+ minutes.
+  3. Powercycle the ATT Gateway, wait 5+ minutes.
      - After several minutes, you should see something like `[2022-01-10 09:42:04,750]: eth0.0: 00:00:00:00:00:00 > 00:00:00:00:00:00, EAP packet (0) v1, len 4, Success (3) id 10, len 4 [0] > eth2`
      - The important part you are looking for is `Success`.
-  6. Once you see `Success`, test your internet connection. You should be able to connect to the web. If not, retrace your steps.
-  7. `ctrl + c` to stop the python listening script.
-  8. Set the bash script to executable so it will run automatically: `chmod +x /config/scripts/post-config.d/eap_proxy.sh`
-  9. Reboot usg with `reboot now`.
-  10. Test that you have internet connectivity.
+  4. Once you see `Success`, test your internet connection. You should be able to connect to the web. If not, retrace your steps.
+  5. `ctrl + c` to stop the python listening script.
+  6. Set the bash script to executable so it will run automatically: `chmod +x /config/scripts/post-config.d/eap_proxy.sh`
+  7. Reboot usg with `reboot now`.
+  8. Test that you have internet connectivity.
 
-### USG Pro
+  
+## USG-PRO-4
+
+#### Wiring Configuration
+
+| Port | Labels | Connect to...      |
+|:----:|--------|----------------------|
+| eth0 | LAN 1  | Your LAN             |
+| eth1 | LAN 2  |                      |
+| eth2 | WAN 1  | ATT ONT box          |
+| eth3 | WAN 2  | ATT Gateway ONT Port |
+
+### Controller configuration
 
 After following the prep instructions above, remote (ssh) into the router and run the following series of commands to set the proper configurations:
 
-> **NOTE**: make sure to change `e0:22:04:xx:xx:xx` to whatever your ATT router's ONT MAC address is. It should be the MAC printed on the side of the router - very easy to find.
+> [!IMPORTANT]
+> Make sure to change `e0:22:04:xx:xx:xx` to whatever your ATT router's ONT MAC address is. It should be the MAC printed on the side of the router - very easy to find.
 
 ```
 configure
@@ -134,18 +146,21 @@ exit
   1. Copy `eap_proxy.py` and `eap_proxy.sh` to `/config/scripts/post-config.d/` by running `scp` from your computer:
       - `scp /path/to/eap_proxy.py username@192.168.1.1:/config/scripts/post-config.d/`
       - `scp /path/to/eap_proxy.sh username@192.168.1.1:/config/scripts/post-config.d/`
-      - > NOTE: Make sure to change `eap_proxy.sh` to match your eth ports depending on which model you have! And change `username` to whatever your unifi username is.
-  3. Remote (ssh) into USG:
+> [!IMPORTANT]
+> Change `eap_proxy.sh` to match your eth ports depending on which model you have!  
+> Change `username` to whatever your unifi host ssh username is.  
+> Change `192.168.1.1` to whatever your USG IP address is.  
+  2. Remote (ssh) into USG:
       1. Move `eap_proxy.py` with `sudo mv /config/scripts/post-config.d/eap_proxy.py /config/scripts/`
       2. Start up the python listening script with `sudo python /config/scripts/eap_proxy.py --restart-dhcp --ignore-when-wan-up --ignore-logoff --ping-gateway --set-mac eth2 eth3`
-  4. Powercycle the ATT Gateway, wait 5+ minutes.
+  3. Powercycle the ATT Gateway, wait 5+ minutes.
      - After several minutes, you should see something like `[2022-01-10 09:42:04,750]: eth0.0: 00:00:00:00:00:00 > 00:00:00:00:00:00, EAP packet (0) v1, len 4, Success (3) id 10, len 4 [0] > eth2`
      - The important part you are looking for is `Success`.
-  6. Once you see `Success`, test your internet connection. You should be able to connect to the web. If not, retrace your steps.
-  7. `ctrl + c` to stop the python listening script.
-  8. Set the bash script to executable so it will run automatically: `chmod +x /config/scripts/post-config.d/eap_proxy.sh`
-  9. Reboot usg with `reboot now`.
-  10. Test that you have internet connectivity.
+  4. Once you see `Success`, test your internet connection. You should be able to connect to the web. If not, retrace your steps.
+  5. `ctrl + c` to stop the python listening script.
+  6. Set the bash script to executable so it will run automatically: `chmod +x /config/scripts/post-config.d/eap_proxy.sh`
+  7. Reboot usg with `reboot now`.
+  8. Test that you have internet connectivity.
 
 ## Conclusion
   
