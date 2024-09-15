@@ -1,6 +1,6 @@
 # Unifi Security Gateway ATT fiber bypass  
 > [!NOTE]
-> **Confirmed working as of July 2024 with Unifi 8.4.59**  
+> **Confirmed working as of September 2024 with Unifi 8.4.59**  
 > Based on [this post (USG)](https://medium.com/@mrtcve/at-t-gigabit-fiber-modem-bypass-using-unifi-usg-updated-c628f7f458cf) and [this post (USG-PRO-4)](https://medium.com/@david.sandor/for-anyone-doing-this-with-the-unifi-security-gateway-pro-4-there-are-some-subtle-changes-you-need-da72bbce894d)  
 
 
