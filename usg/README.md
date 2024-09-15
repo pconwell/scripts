@@ -1,30 +1,27 @@
 # Unifi Security Gateway ATT fiber bypass  
-> based on [this post (USG)](https://medium.com/@mrtcve/at-t-gigabit-fiber-modem-bypass-using-unifi-usg-updated-c628f7f458cf) and [this post (USG-PRO-4)](https://medium.com/@david.sandor/for-anyone-doing-this-with-the-unifi-security-gateway-pro-4-there-are-some-subtle-changes-you-need-da72bbce894d)  
-> The original article includes IPv6, these instructions only include IPv4
-
 > [!NOTE]
-> Confirmed working as of July 2024
+> **Confirmed working as of July 2024 with Unifi 8.4.59**  
+> Based on [this post (USG)](https://medium.com/@mrtcve/at-t-gigabit-fiber-modem-bypass-using-unifi-usg-updated-c628f7f458cf) and [this post (USG-PRO-4)](https://medium.com/@david.sandor/for-anyone-doing-this-with-the-unifi-security-gateway-pro-4-there-are-some-subtle-changes-you-need-da72bbce894d)  
 
-Once set up, this will completely bypass the ATT Gateway. Internet traffic will pass directly from the USG|USG-PRO-4 to the ATT ONT. The only thing the ATT Gateway will do is provide the authentication certificates necessary to sign in to the ATT network. In fact, once it authenticates, you can disconnect the ATT Gateway. However, this is not particularly recommended as the USG may need to reauthenticate at unknown times. Leaving it connected allows the USG to reauthenticate whenever necessary.
+
+Once set up, this will completely bypass the ATT Gateway. Internet traffic will pass directly from the USG|USG-PRO-4 to the ATT ONT. The only thing the ATT Gateway will do is provide the authentication certificates necessary to sign in to the ATT network. In fact, once it authenticates, you can disconnect the ATT Gateway. However, this is not recommended as the USG will need to reauthenticate occationally (such as after a power outage). Leaving it connected allows the USG to reauthenticate as needed.
 
 
 ## Equipment:
   * ATT Optical Network Terminal (the box the fiber line goes into)
   * ATT Broadband Gateway - (tested with pace 5268Aac)
   * Unifi Security Gateway (USG) or Unifi Security Gateway Pro 4 (USG-PRO-4)
-  * Unifi Controller - (This will work with a cloud hosted instance, but you will need to do the steps in a different order *and* you can run into issues if you need to change configurations while the bypass is being set up. For the initial setup, running a local version of the controller is highly recommended.)
+  * Unifi Controller - (This will work with a cloud hosted instance, but for the initial setup a local version of the controller is highly recommended.)
 
 
 ## Prep
-1. Set up your USG|USG-PRO-4 Pro so that it is adopted by the controller. Don't worry about individual settings/configurations yet, just get it adopted.
-2. (Optional - but recommended) Using the ATT "DMZ", set up the USG|USG-PRO-4 so that it connects to the internet and configure your network the way you want it and make sure everything works correctly before you set up the bypass.
-> [!TIP]
-> I would recommend configuring your network to the BARE MINIMUM necessary to test that the internet works. *Then* set up the bypass. Once the bypass is working, then configure your network the way you want it.
-3. Download the necessary files from this repo (eap_proxy.py and eap_tcpdump.sh) to your computer because the internet will stop working at certain steps.
-4. Connect your computer to the ATT gateway via one of the LAN ports on the ATT router.
-  - Disable all possible services on the ATT gateway - particular the wifi radios.
-  - Set the gateway LAN IP address to something like 192.168.254.254 or whatever won't conflict with your unifi LAN. This won't really matter as we aren't using the LAN on the gateway, but just to make life easier.
-5. Connect your computer back to the Unifi LAN (either directly to the USG LAN port, or through a swich connected to the USG LAN port).
+1. Set up your USG|USG-PRO-4 Pro so that it is adopted by the controller.
+2. Optional - but recommended:
+   - Using the ATT "DMZ", set up the USG|USG-PRO-4 so that it connects to the internet and configure your network the way you want it and make sure everything works correctly before you set up the bypass.
+   - Connect your computer to the ATT gateway via one of the LAN ports on the ATT router and disable all possible services on the ATT gateway - particular the wifi radios.
+   - Set the gateway LAN IP address to something like 192.168.254.254 or whatever won't conflict with your unifi LAN. This won't really matter as we aren't using the LAN on the gateway, but just to make life easier.
+5. Download the necessary files from this repo (eap_proxy.py and eap_tcpdump.sh) to your computer because the internet will stop working at certain steps.
+6. Connect your computer to the Unifi LAN (either directly to the USG LAN port, or through a swich connected to the USG LAN port).
 
 
 ## USG
@@ -36,7 +33,7 @@ Once set up, this will completely bypass the ATT Gateway. Internet traffic will 
 > [!NOTE]
 > Depending on when your USG was manufactured, you will either see ports labeled [`WAN`,`LAN`,`VOIP`], or [`WAN 1`,`LAN 1`,`WAN 2 / LAN 2`]. The hardware (as far as I know) is idential in both, so regardless of how they are labeled, they are mapped as follows:
 
-| Port | Old Labels | New Labels    | Connect to...      |
+| Port | Old Labels | New Labels    | Connect to...        |
 |:----:|------------|---------------|----------------------|
 | eth0 | WAN        | WAN 1         | ATT ONT box          |
 | eth1 | LAN        | LAN 1         | Your LAN             |
@@ -47,7 +44,7 @@ Once set up, this will completely bypass the ATT Gateway. Internet traffic will 
 After following the prep instructions above, remote (ssh) into the router and run the following series of commands to set the proper configurations:  
 
 > [!IMPORTANT]
-> Make sure to change `e0:22:04:xx:xx:xx` to whatever your ATT router's ONT MAC address is. It should be the MAC printed on the side of the router - very easy to find.
+> Make sure to change `e0:22:04:xx:xx:xx` to whatever your ATT router's MAC address is. It should be the MAC printed on the side of the router - very easy to find.
 
 ```
 configure
@@ -98,22 +95,28 @@ exit
 
   
 ## USG-PRO-4
+> [!CAUTION]
+> For the USG, scroll up.
 
 #### Wiring Configuration
 
-| Port | Labels | Connect to...      |
+| Port | Labels | Connect to...        |
 |:----:|--------|----------------------|
 | eth0 | LAN 1  | Your LAN             |
 | eth1 | LAN 2  |                      |
 | eth2 | WAN 1  | ATT ONT box          |
 | eth3 | WAN 2  | ATT Gateway ONT Port |
 
+> [!TIP]
+> If you want to use one of the SFP ports for LAN (to connect the USG-PRO-4 to a swich via DAC, for example), you can reassign the ports in the controller (Unifi Devices -> USG-PRO-4 -> Settings -> Ports -> Configure Interfaces). I set mind as eth0 -> disabled; eth1 -> ATT Gateway; eth2 -> ATT ONT; eth3 -> LAN (SFP). You will need to change the below configuration commands to match. For my setup, I left eth2 as is and changed eth3 -> eth1 below. You can set any port to any configuration, so there is nothing special about the way I did it - other than I wanted LAN on one of the SFP ports (eth2 or eth3).
+
 ### Controller configuration
 
 After following the prep instructions above, remote (ssh) into the router and run the following series of commands to set the proper configurations:
 
 > [!IMPORTANT]
-> Make sure to change `e0:22:04:xx:xx:xx` to whatever your ATT router's ONT MAC address is. It should be the MAC printed on the side of the router - very easy to find.
+> Make sure to change `e0:22:04:xx:xx:xx` to whatever your ATT router's MAC address is. It should be the MAC printed on the side of the router - very easy to find.  
+> I had issues with copy/pasting quoted text below, so you may have to type commands that include quote marks.
 
 ```
 configure
@@ -166,4 +169,4 @@ exit
   
 You should now have your USG / USG Prpo configured to completely bypass the ATT Gateway.
 
-Just note that with the USG *will not* get full gig speeds setting up your network this way, particularly if you use the IDS/IPS settings. If this is an issue for you, there really isn't a good work around and you should buy different hardware. The USG simply can't handle gig speeds. However, in my experience, even without the USG in the mix, I've never come remotely close to using my available bandwidth anyway, so it's not an issue for me. Even only getting around 80mbps/80mbps (with IPS enabled), I've never run into a bandwidth issue. I tested with 6+ 4k streams running conncurrently and didn't have a problem.
+Just note that with the USG *will not* get full gig speeds setting up your network this way, particularly if you use the IDS/IPS settings. If this is an issue for you, there really isn't a good work around and you should buy different hardware. The USG simply can't handle gig speeds. However, in my experience, I've never come remotely close to using my available bandwidth anyway, so it's not an issue for me. Even only getting around 80mbps/80mbps (with IPS enabled), I've never run into a bandwidth issue. I tested with 6+ 4k streams running conncurrently and didn't have a problem.
