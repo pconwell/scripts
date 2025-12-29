@@ -1,4 +1,5 @@
 (\.|^)(ru|cn|ro|ml|ga|gq|cf|tk|pw|ua|ug|ve|surf|stream|download)$
+^(.+\.)?((web|sr|logs|ads|cloudservices|wwwimg)\.roku\.com|ravm\.tv)$
 ^(.+[_.-])?adse?rv(er?|ice)?s?[0-9]*[_.-]
 ^(.+[_.-])?telemetry[_.-]
 ^ad([sxv]?[0-9]*|system)[_.-]([^.[:space:]]+\.){1,}|[_.-]ad([sxv]?[0-9]*|system)[_.-]
