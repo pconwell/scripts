@@ -20,52 +20,6 @@ ff02::3 ip6-allhosts
 
 # Custom host records are listed here.
 
-# roku
-0.0.0.0 ads.roku.com
-0.0.0.0 amarillo.logs.roku.com
-0.0.0.0 amoeba-plus.web.roku.com
-0.0.0.0 austin.logs.roku.com
-0.0.0.0 bryan.logs.roku.com
-0.0.0.0 camden.logs.roku.com
-0.0.0.0 cloudservices.roku.com
-0.0.0.0 cooper.logs.roku.com
-0.0.0.0 customer-feedbacks.web.roku.com
-0.0.0.0 digdug-g2.logs.roku.com
-0.0.0.0 digdug.logs.roku.com
-0.0.0.0 display.ravm.tv
-0.0.0.0 esp.logs.roku.com
-0.0.0.0 giga.logs.roku.com
-0.0.0.0 gilbert.logs.roku.com
-0.0.0.0 griffin.logs.roku.com
-0.0.0.0 hereford.logs.roku.com
-0.0.0.0 i.ads.roku.com
-0.0.0.0 identity-dev.ads.roku.com
-0.0.0.0 identity.ads.roku.com
-0.0.0.0 lagrange.logs.roku.com
-0.0.0.0 liberty.logs.roku.com
-0.0.0.0 littlefield.logs.roku.com
-0.0.0.0 logs.roku.com
-0.0.0.0 longview.logs.roku.com
-0.0.0.0 midland.logs.roku.com
-0.0.0.0 mobile.logs.roku.com
-0.0.0.0 p.ads.roku.com
-0.0.0.0 paolo.logs.roku.com
-0.0.0.0 raps-perf.ravm.tv
-0.0.0.0 raps.ravm.tv
-0.0.0.0 ravm.tv
-0.0.0.0 richmond.logs.roku.com
-0.0.0.0 rollingwood.logs.roku.com
-0.0.0.0 rxr.ravm.tv
-0.0.0.0 samples.voice.cti.roku.com
-0.0.0.0 scribe.logs.roku.com
-0.0.0.0 sugarland.logs.roku.com
-0.0.0.0 traces.sr.roku.com
-0.0.0.0 track.sr.roku.com
-0.0.0.0 tyler.logs.roku.com
-0.0.0.0 victoria.logs.roku.com
-0.0.0.0 windsor.logs.roku.com
-0.0.0.0 wwwimg.roku.com
-
 # amcrest
 0.0.0.0 p2p.amcrestview.com
 0.0.0.0 amcrestview.com
