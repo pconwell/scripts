@@ -30,6 +30,16 @@ ff02::3 ip6-allhosts
 0.0.0.0 rokutime.com
 0.0.0.0 ls.cti.roku.com
 0.0.0.0 nflxso.net
+0.0.0.0 s.mzstatic.com
+0.0.0.0 xp.apple.com
+0.0.0.0 bag.itunes.apple.com
+0.0.0.0 experiments.apple.com
+0.0.0.0 atve.tv.apple.com
+0.0.0.0 cdn-media.brightline.tv
+0.0.0.0 dev-client-sdk-configs.bamgrid.com
+0.0.0.0 disney.images.edge.bamgrid.com
+0.0.0.0 play-edge.itunes.apple.com
+0.0.0.0 known-issues.apple.com
 
 # amcrest
 0.0.0.0 p2p.amcrestview.com
