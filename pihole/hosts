@@ -20,6 +20,16 @@ ff02::3 ip6-allhosts
 
 # Custom host records are listed here.
 
+# more roku stuff
+0.0.0.0 mediaservices.cdn-apple.com
+0.0.0.0 api.statsig.com
+0.0.0.0 netflix.com
+0.0.0.0 kochava.com
+0.0.0.0 nflximg.com
+0.0.0.0 nflxext.com
+0.0.0.0 rokutime.com
+0.0.0.0 ls.cti.roku.com
+
 # amcrest
 0.0.0.0 p2p.amcrestview.com
 0.0.0.0 amcrestview.com
