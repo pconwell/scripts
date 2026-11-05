@@ -1,5 +1,4 @@
 (\.|^)(ru|cn|ro|ml|ga|gq|cf|tk|pw|ua|ug|ve|surf|stream|download)$
-^(.+\.)?((web|logs|ads|cloudservices|wwwimg|images\.sr)\.roku\.com|ravm\.tv)$
 ^(.+\.)?(xiaomi|miui)\.(com|net)$
 ^(.+[_.-])?adse?rv(er?|ice)?s?[0-9]*[_.-]
 ^(.+[_.-])?telemetry[_.-]
