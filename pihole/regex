@@ -1,6 +1,7 @@
 (\.|^)(ru|cn|ro|ml|ga|gq|cf|tk|pw|ua|ug|ve|surf|stream|download)$
 ^(.+\.)?(xiaomi|miui)\.(com|net)$
 ^(.+[_.-])?adse?rv(er?|ice)?s?[0-9]*[_.-]
+^(.+\.)?((web|logs|ads|cloudservices|wwwimg|images\.sr)\.roku\.com|ravm\.tv)$
 ^(.+[_.-])?telemetry[_.-]
 ^ad([sxv]?[0-9]*|system)[_.-]([^.[:space:]]+\.){1,}|[_.-]ad([sxv]?[0-9]*|system)[_.-]
 ^adim(age|g)s?[0-9]*[_.-]
